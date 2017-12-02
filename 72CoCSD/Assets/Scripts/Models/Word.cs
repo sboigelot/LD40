@@ -4,49 +4,11 @@ using System.Linq;
 using Assets.Scripts.Managers;
 using UnityEngine;
 
-namespace Assets.Scripts.Model
+namespace Assets.Scripts.Models
 {
     [Serializable]
     public class Word
     {
-        private readonly List<WordPart> wordpart_v = new List<WordPart>
-        {
-            new WordPart("a", 2f),
-            new WordPart("e", 3f),
-            new WordPart("i", 2f),
-            new WordPart("o", 1.5f),
-            new WordPart("u", 1.5f),
-            new WordPart("y", 0.7f),
-        };
-
-        private readonly List<WordPart> wordpart_c = new List<WordPart>
-        {
-            new WordPart("z", .2f),
-            new WordPart("r", 1f),
-            new WordPart("t", 1.2f),
-            new WordPart("p", 1.2f),
-            new WordPart("q", 1f),
-            new WordPart("d", 1.2f),
-            new WordPart("f", 1f),
-            new WordPart("g", 1.1f),
-            new WordPart("h", 1f),
-            new WordPart("j", 1.2f),
-            new WordPart("k", 1.2f),
-            new WordPart("l", 1.3f),
-            new WordPart("m", 1.3f),
-            new WordPart("w", 0.7f),
-            new WordPart("x", 0.6f),
-            new WordPart("c", 1.2f),
-            new WordPart("v", 1.2f),
-            new WordPart("b", 1.2f),
-            new WordPart("n", 1.3f),
-            new WordPart("ll", .7f),
-            new WordPart("kk", .3f),
-            new WordPart("gg", .3f),
-            new WordPart("ch", .7f),
-            new WordPart("ss", 1f)
-        };
-
         public WordPart RandomPart(List<WordPart> list)
         {
             var totalPonderation = list.Sum(p => p.Ponderation);
@@ -95,13 +57,13 @@ namespace Assets.Scripts.Model
                 {
                     vCount++;
                     cCount = 0;
-                    Text += RandomPart(wordpart_v).Text;
+                    Text += RandomPart(PrototypeManager.Instance.VowelPrototypes).Text;
                 }
                 else
                 {
                     cCount++;
                     vCount = 0;
-                    Text += RandomPart(wordpart_c).Text;
+                    Text += RandomPart(PrototypeManager.Instance.ConsonantPrototypes).Text;
                 }
             }
         }

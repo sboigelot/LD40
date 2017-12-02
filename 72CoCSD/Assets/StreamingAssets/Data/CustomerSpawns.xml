@@ -1,0 +1,27 @@
+<ArrayOfCustomerSpawn>
+
+  <CustomerSpawn
+        SpawnDay="0"
+        SpawnHour="8"
+        SpawnMinute="10"
+        Name="@nthon"
+        Spawned="false"
+        MinComplexity="0"
+        MaxComplexity="30"
+        StartingIssue="2"
+        LanguageProficiency="1"
+        StartingSatisfaction="100"/>
+
+  <CustomerSpawn
+        SpawnDay="0"
+        SpawnHour="9"
+        SpawnMinute="20"
+        Name="@nthon"
+        Spawned="false"
+        MinComplexity="0"
+        MaxComplexity="30"
+        StartingIssue="2"
+        LanguageProficiency="1"
+        StartingSatisfaction="100"/>
+  
+</ArrayOfCustomerSpawn>

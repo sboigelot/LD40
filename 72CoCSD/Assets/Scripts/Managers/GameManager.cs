@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Model;
+﻿using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +9,13 @@ namespace Assets.Scripts.Managers
         public Game Game;
         public Player Player;
         public AnimationCurve WordLengths;
-            
+        public PrototypeManager PrototypeManager;
+
         public void Start()
         {
-            NewGame();
+            //make the prototypeManager visible in unity inspector
+            PrototypeManager = PrototypeManager.Instance;
+            StartCoroutine(PrototypeManager.LoadPrototypes(()=>NewGame()));
         }
 
         public void NewGame()
@@ -24,7 +27,10 @@ namespace Assets.Scripts.Managers
         
         public void Update()
         {
-            Game.Update(Time.deltaTime);
+            if (Game != null)
+            {
+                Game.Update(Time.deltaTime);
+            }
         }
     }
 }

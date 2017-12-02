@@ -1,0 +1,29 @@
+<ArrayOfWordPart>
+
+  <WordPart Text="a" Ponderation="2"/>
+  <WordPart Text="z" Ponderation="0.2"/>
+  <WordPart Text="r" Ponderation="1"/>
+  <WordPart Text="t" Ponderation="1.2"/>
+  <WordPart Text="p" Ponderation="1.2"/>
+  <WordPart Text="q" Ponderation="1"/>
+  <WordPart Text="d" Ponderation="1.2"/>
+  <WordPart Text="f" Ponderation="1"/>
+  <WordPart Text="g" Ponderation="1.1"/>
+  <WordPart Text="h" Ponderation="1"/>
+  <WordPart Text="j" Ponderation="1.2"/>
+  <WordPart Text="k" Ponderation="1.2"/>
+  <WordPart Text="l" Ponderation="1.3"/>
+  <WordPart Text="m" Ponderation="1.3"/>
+  <WordPart Text="w" Ponderation="0.7"/>
+  <WordPart Text="x" Ponderation="0.6"/>
+  <WordPart Text="c" Ponderation="1.2"/>
+  <WordPart Text="v" Ponderation="1.2"/>
+  <WordPart Text="b" Ponderation="1.2"/>
+  <WordPart Text="n" Ponderation="1.3"/>
+  <WordPart Text="ll" Ponderation="0.7"/>
+  <WordPart Text="kk" Ponderation="0.3"/>
+  <WordPart Text="gg" Ponderation="0.3"/>
+  <WordPart Text="ch" Ponderation="0.7"/>
+  <WordPart Text="ss" Ponderation="1"/>
+    
+</ArrayOfWordPart>

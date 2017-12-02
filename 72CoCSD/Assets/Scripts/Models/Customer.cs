@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Scripts.Model
+namespace Assets.Scripts.Models
 {
     [Serializable]
     public class Customer

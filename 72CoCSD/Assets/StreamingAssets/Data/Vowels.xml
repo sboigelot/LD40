@@ -1,0 +1,10 @@
+<ArrayOfWordPart>
+
+  <WordPart Text="a" Ponderation="2"/>
+  <WordPart Text="e" Ponderation="3"/>
+  <WordPart Text="i" Ponderation="2"/>
+  <WordPart Text="o" Ponderation="1.5"/>
+  <WordPart Text="u" Ponderation="1.5"/>
+  <WordPart Text="y" Ponderation="0.7"/>
+
+</ArrayOfWordPart>

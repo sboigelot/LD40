@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Assets.Scripts.Model
+namespace Assets.Scripts.Models
 {
     [Serializable]
     public class Sentence
