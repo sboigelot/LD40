@@ -10,7 +10,7 @@ namespace Assets.Scripts.UI
     {
         public Text ChatText;
         public InputField Input;
-
+        
         public void Send()
         {
             if (string.IsNullOrEmpty(Input.text.Trim()))
@@ -18,9 +18,14 @@ namespace Assets.Scripts.UI
                 return;
             }
 ;
-            WriteLine("15:42:00","green","Player", Input.text);
+            var dayTime = GameManager.Instance.Game.DayTime;
+            string time = string.Format("{0:00}:{1:00} {2}",
+                    dayTime.Hours < 12 ? dayTime.Hours : dayTime.Hours - 12,
+                    dayTime.Minutes,
+                    dayTime.Hours <= 12 ? "AM" : "PM");
+            WriteLine(time, "green","Player", Input.text);
             Input.text = "";
-            WriteLine("15:42:00", "red", "Customer", GameManager.Instance.Game.Issues[UnityEngine.Random.Range(0,99)].Question.ToString());
+            WriteLine(time, "red", "Customer", GameManager.Instance.Game.Issues[UnityEngine.Random.Range(0,99)].Question.ToString());
             Input.ActivateInputField();
         }
 

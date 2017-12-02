@@ -31,6 +31,7 @@ namespace Assets.Scripts.UI
                 var issueCard = Instantiate(IssueTemplate, IssuesPanel);
                 issueCard.GetComponentInChildren<Text>().text =
                     string.Format(IssueTextFormat.Replace("<br>", "\n"), issue.Question, issue.Answer);
+                issueCard.GetComponentInChildren<Text>().text += " (cplx: " + issue.Complexity + ")";
                 issueCard.SetActive(true);
             }
         }

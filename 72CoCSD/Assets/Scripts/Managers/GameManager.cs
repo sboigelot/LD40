@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Assets.Scripts.Model;
+﻿using Assets.Scripts.Model;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Managers
 {
@@ -10,7 +8,8 @@ namespace Assets.Scripts.Managers
     {
         public Game Game;
         public Player Player;
-
+        public AnimationCurve WordLengths;
+            
         public void Start()
         {
             NewGame();
@@ -21,6 +20,11 @@ namespace Assets.Scripts.Managers
             Player = new Player();
             Game = new Game();
             Game.Initialize();
+        }
+        
+        public void Update()
+        {
+            Game.Update(Time.deltaTime);
         }
     }
 }

@@ -6,10 +6,8 @@ namespace Assets.Scripts.Model
     public class Customer
     {
         public string Name;
-        public float StartingIssue;
-        public float IssueLeft;
-        public float LanguageProficiency;
-        public float StartingSatisfaction;
+        public int IssueLeft;
         public float Satisfaction;
+        public CustomerSpawn Prototype;
     }
 }

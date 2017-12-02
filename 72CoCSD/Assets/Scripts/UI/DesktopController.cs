@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Scripts.Managers;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
 {
     public class DesktopController : MonoBehaviour
     {
+        public Text ClockText;
+
         public GameObject ChatWindowTemplate;
         public GameObject ProcessWindow;
         public GameObject ContactWindow;
@@ -36,6 +39,16 @@ namespace Assets.Scripts.UI
             }
 
             newChat.GetComponent<WindowController>().OpenWindow();
+        }
+
+        public void Update()
+        {
+            var dayTime = GameManager.Instance.Game.DayTime;
+            ClockText.text = string.Format("Day {0} - {1:00}:{2:00} {3}",
+                dayTime.Days,
+                dayTime.Hours < 12 ? dayTime.Hours : dayTime.Hours - 12,
+                dayTime.Minutes,
+                dayTime.Hours <= 12 ? "AM" : "PM");
         }
     }
 }
