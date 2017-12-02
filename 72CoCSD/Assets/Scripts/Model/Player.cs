@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Model
 {
+    [Serializable]
     public class Player
     {
         public List<Issue> ProcedureList;

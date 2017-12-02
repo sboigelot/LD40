@@ -1,25 +1,41 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class WindowController : MonoBehaviour, IPointerDownHandler
+namespace Assets.Scripts.UI
 {
-    public bool DestroyOnClose;
-
-    public void OnPointerDown(PointerEventData eventData)
+    public class WindowController : MonoBehaviour, IPointerDownHandler
     {
-        transform.SetAsLastSibling();
-    }
+        public bool DestroyOnClose;
 
-    public void CloseWindow()
-    {
-        if (DestroyOnClose)
-        {   
-            Destroy(gameObject);
-        }
-        else
+        public Action OnOpen;
+
+        public void OnPointerDown(PointerEventData eventData)
         {
-            gameObject.SetActive(false);
+            transform.SetAsLastSibling();
+        }
+
+        public void CloseWindow()
+        {
+            if (DestroyOnClose)
+            {   
+                Destroy(gameObject);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        public void OpenWindow()
+        {
+            if (OnOpen != null)
+            {
+                OnOpen();
+            }
+
+            gameObject.SetActive(true);
+            transform.SetAsLastSibling();
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿namespace Assets.Scripts.Model
+﻿using System;
+
+namespace Assets.Scripts.Model
 {
+    [Serializable]
     public class Customer
     {
         public string Name;

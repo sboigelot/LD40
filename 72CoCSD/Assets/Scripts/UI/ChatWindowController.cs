@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +17,22 @@ namespace Assets.Scripts.UI
             {
                 return;
             }
-
-            ChatText.text +=
-                string.Format("<color=red>11:31:00</color> <color=green>Player:</color> {0}" + Environment.NewLine,
-                    Input.text);
+;
+            WriteLine("15:42:00","green","Player", Input.text);
             Input.text = "";
+            WriteLine("15:42:00", "red", "Customer", GameManager.Instance.Game.Issues[UnityEngine.Random.Range(0,99)].Question.ToString());
+            Input.ActivateInputField();
+        }
+
+        public void WriteLine(string time,string userColor, string user, string text)
+        {
+            ChatText.text +=
+                string.Format(
+                    "<color=red>{0}</color> <color={1}>{2}</color>: {3}" + Environment.NewLine,
+                    time,
+                    userColor,
+                    user,
+                    text);
         }
     }
 }
