@@ -16,14 +16,19 @@ namespace Assets.Scripts.Models
         public List<Issue> Issues;
         public List<Customer> CustomerQueue;
         public List<Word> Words;
-        
+        public List<DailyReport> DailyReports;
+
+        public DailyReport TodayReport
+        {
+            get { return DailyReports.Last(); }
+        }
+
         public bool TutorialCompleted;
 
         public TimeSpan DayTime;
         public TimeSpan DayStart = new TimeSpan(0, 8, 0, 0);
         public TimeSpan DayEnd = new TimeSpan(5, 17, 0, 0);
-        public float MinutesPerGameTime = 1f;
-
+        
         public void Initialize()
         {
             DayTime = new TimeSpan(DayStart.Ticks);
@@ -32,6 +37,11 @@ namespace Assets.Scripts.Models
             GenerateIssues();
             CustomerQueue = new List<Customer>();
             Paused = false;
+
+            DailyReports = new List<DailyReport>
+            {
+                new DailyReport()
+            };
         }
 
         private void ResetCustomerSpawns()
@@ -45,7 +55,7 @@ namespace Assets.Scripts.Models
         private void GenerateVocabulary()
         {
             Words = new List<Word>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < PrototypeManager.Instance.GameSettings.NumberOfPossibleWords; i++)
             {
                 Words.Add(new Word());
             }
@@ -55,7 +65,7 @@ namespace Assets.Scripts.Models
         private void GenerateIssues()
         {
             Issues = new List<Issue>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < PrototypeManager.Instance.GameSettings.NumberOfPossibleIssues; i++)
             {
                 var issue = new Issue();
                 issue.Initialise(Words);
@@ -66,11 +76,42 @@ namespace Assets.Scripts.Models
         
         public void Update(float deltaTime)
         {
-            if (!Paused)
+            if (!Paused && PrototypeManager.Instance.Loaded)
             {
                 GameTime += Time.deltaTime;
-                DayTime = DayTime.Add(TimeSpan.FromMinutes(Time.deltaTime * MinutesPerGameTime));
+                DayTime = DayTime.Add(TimeSpan.FromMinutes(Time.deltaTime * PrototypeManager.Instance.GameSettings.MinutesPerGameTime));
+
+                if (DayTime.Hours >= DayEnd.Hours)
+                {
+                    EndOfTheDay();
+                }
+
                 SpawnCustomers();
+                UpdateCustomerSatisfaction();
+            }
+        }
+
+        private void EndOfTheDay()
+        {
+            DisconectAllClient();
+            DesktopController.Instance.ShowDailyReport(DayTime.Days);
+            DayTime = new TimeSpan(DayTime.Days + 1, DayStart.Hours, DayStart.Minutes, 0);
+            DailyReports.Add(new DailyReport { Day = DayTime.Days });
+        }
+
+        private void DisconectAllClient()
+        {
+            foreach (var customer in CustomerQueue)
+            {
+                customer.RageQuit();
+            }
+        }
+
+        private void UpdateCustomerSatisfaction()
+        {
+            foreach (var customer in CustomerQueue.ToList())
+            {
+                customer.ImpactSatisfaction(-Time.deltaTime * PrototypeManager.Instance.GameSettings.SatisfactionLossPerGameTime);
             }
         }
 

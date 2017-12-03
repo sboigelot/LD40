@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
@@ -10,6 +11,7 @@ namespace Assets.Scripts.UI
 {
     public class ChatWindowController : WindowController
     {
+        public Text TitleText;
         public Text ChatText;
         public InputField Input;
 
@@ -20,7 +22,7 @@ namespace Assets.Scripts.UI
             Input.onValidateInput += OnValidateInput;
             ChatText.text = "";
             Contact = (Customer)context;
-            WriteNextLine();
+            WriteNextLine(0);
         }
 
         private char OnValidateInput(string text, int charIndex, char addedChar)
@@ -33,19 +35,19 @@ namespace Assets.Scripts.UI
             return forced.Length > charIndex ? forced[charIndex] : ' ';
         }
 
-        private void WriteNextLine()
+        private void WriteNextLine(int delayInSeconds)
         {
             var nextLine = Contact.Speak();
 
             if (string.IsNullOrEmpty(nextLine))
             {
-                WriteLine(GetTimeString(), "blue", "System", 
-                    string.Format("<color=blue>{0} left the chat</color>", Contact.Name));
+                Contact.QuitSatified();
                 Input.enabled = false;
                 return;
             }
-            
-            WriteLine(GetTimeString(), "red", Contact.Name, nextLine);
+
+            StartCoroutine(
+                WriteLineIn("red", Contact.Name, nextLine, delayInSeconds));
         }
 
         public void Send()
@@ -56,15 +58,21 @@ namespace Assets.Scripts.UI
             }
 
             string time = GetTimeString();
-            WriteLine(time, "green","Player", Input.text);
+            string playerText = Input.text.Trim();
+            WriteLine(time, "green","Player", playerText);
 
-            if(Contact.Read(Input.text) >= .9f)
+            if(Contact != null && Contact.Read(playerText) >= .9f)
             {
-                WriteNextLine();
+                WriteNextLine(2);
             }
             else
             {
-                WriteLine(time, "red", Contact.Name, Contact.GetLastSentence().ToUpper());
+                StartCoroutine(
+                    WriteLineIn(
+                        "red",
+                        Contact.Name,
+                        Contact.GetLastSentence().ToUpper(),
+                        2));
             }
 
             Input.text = "";
@@ -80,8 +88,14 @@ namespace Assets.Scripts.UI
                     dayTime.Hours <= 12 ? "AM" : "PM");
             return time;
         }
-        
-        public void WriteLine(string time,string userColor, string user, string text)
+
+        public IEnumerator WriteLineIn(string userColor, string user, string text, int delayInSeconds)
+        {
+            yield return new WaitForSeconds(delayInSeconds);
+            WriteLine(GetTimeString(), userColor, user, text);
+        }
+
+        public void WriteLine(string time, string userColor, string user, string text)
         {
             ChatText.text +=
                 string.Format(
@@ -96,6 +110,29 @@ namespace Assets.Scripts.UI
             {
                 ChatText.text = ChatText.text.Substring(ChatText.text.IndexOf('\n') + 1);
             }
+        }
+
+        public override void FocusWindowAndInput()
+        {
+            base.FocusWindowAndInput();
+            Input.Select();
+        }
+
+        public void Update()
+        {
+            if (Contact == null)
+            {
+                return;
+            }
+
+            var customer = Contact as Customer;
+            if (customer != null)
+            {
+                TitleText.text = Contact.Name + " (" + Mathf.Round(customer.Satisfaction) + ")";
+                return;
+            }
+
+            TitleText.text = Contact.Name;
         }
     }
 }

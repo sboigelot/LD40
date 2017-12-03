@@ -10,7 +10,7 @@
         MaxComplexity="30"
         StartingIssue="2"
         LanguageProficiency="1"
-        StartingSatisfaction="100"/>
+        StartingSatisfaction="24"/>
 
   <CustomerSpawn
         SpawnDay="0"
@@ -22,6 +22,6 @@
         MaxComplexity="30"
         StartingIssue="2"
         LanguageProficiency="1"
-        StartingSatisfaction="100"/>
+        StartingSatisfaction="240"/>
   
 </ArrayOfCustomerSpawn>

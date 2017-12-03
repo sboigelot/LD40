@@ -3512,8 +3512,8 @@ MonoBehaviour:
     Issues: []
     CustomerQueue: []
     Words: []
+    DailyReports: []
     TutorialCompleted: 0
-    MinutesPerGameTime: 10
   Player:
     ProcedureList: []
     Xp: 0
@@ -3551,6 +3551,14 @@ MonoBehaviour:
     VowelPrototypes: []
     ConsonantPrototypes: []
     CustomerSpawns: []
+    GameSettings:
+      MinutesPerGameTime: 1
+      SatisfactionLossPerGameTime: 1
+      SatisfactionGainPerCorrectAnswer: 1
+      SatisfactionGainPerIncorrectAnswer: 1
+      NumberOfPossibleIssues: 100
+      NumberOfPossibleWords: 100
+    Loaded: 0
 --- !u!4 &334907256
 Transform:
   m_ObjectHideFlags: 0
@@ -5839,28 +5847,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319c9e28e32a6fc468071a15ca90b36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Customer:
-    Name: 
-    IssueLeft: 0
-    Satisfaction: 0
-    Prototype:
-      Name: 
-      SpawnDay: 0
-      SpawnHour: 0
-      SpawnMinute: 0
-      Spawned: 0
-      MinComplexity: 0
-      MaxComplexity: 0
-      StartingIssue: 0
-      LanguageProficiency: 0
-      StartingSatisfaction: 0
-    CurrentIssue:
-      Question:
-        Words: []
-      Answer:
-        Words: []
-      Unlocked: 0
   CustomerNameText: {fileID: 376059150}
+  ChatWindow: {fileID: 0}
 --- !u!1 &587961349
 GameObject:
   m_ObjectHideFlags: 0
@@ -14408,29 +14396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnClose: 0
+  TitleText: {fileID: 88483002}
   ChatText: {fileID: 1453907537}
   Input: {fileID: 1130364121}
-  Customer:
-    Name: 
-    IssueLeft: 0
-    Satisfaction: 0
-    Prototype:
-      Name: 
-      SpawnDay: 0
-      SpawnHour: 0
-      SpawnMinute: 0
-      Spawned: 0
-      MinComplexity: 0
-      MaxComplexity: 0
-      StartingIssue: 0
-      LanguageProficiency: 0
-      StartingSatisfaction: 0
-    CurrentIssue:
-      Question:
-        Words: []
-      Answer:
-        Words: []
-      Unlocked: 0
 --- !u!1 &1563752427
 GameObject:
   m_ObjectHideFlags: 0

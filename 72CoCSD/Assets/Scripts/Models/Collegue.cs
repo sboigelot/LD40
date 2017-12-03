@@ -26,20 +26,27 @@ namespace Assets.Scripts.Models
 
         public string Speak()
         {
+            //only support one dialog for now
             CurrentDialog = Dialogs.FirstOrDefault();
-            if (CurrentDialog == null)
+
+            if (CurrentDialog == null || CurrentDialog.MoveNext())
             {
                 return "";
             }
 
             Dialogs.RemoveAt(0);
-            NextForcedPlayerInput = CurrentDialog.ForcedAnswer;
-            return CurrentDialog.Question;
+            NextForcedPlayerInput = CurrentDialog.CurrentLine.ForcedAnswer;
+            return CurrentDialog.CurrentLine.Question;
         }
 
         public string GetLastSentence()
         {
-            return CurrentDialog == null ? "" : CurrentDialog.Question;
+            return CurrentDialog == null || CurrentDialog.CurrentLine == null ? "" : CurrentDialog.CurrentLine.Question;
+        }
+
+        public void QuitSatified()
+        {
+            
         }
     }
 }

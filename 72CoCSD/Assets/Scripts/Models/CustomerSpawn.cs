@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Xml.Serialization;
+using Assets.Scripts.Managers;
 
 namespace Assets.Scripts.Models
 {
     [Serializable]
     public class CustomerSpawn
     {
-        [XmlAttribute]
-        public string Name;
-
         [XmlIgnore]
         public TimeSpan SpawnTime
         {
@@ -44,11 +42,13 @@ namespace Assets.Scripts.Models
 
         public Customer SpawnCustomer()
         {
+            var twitchSubNames = PrototypeManager.Instance.TwitchSubNames;
             var customer = new Customer
             {
-                Name = Name,
+                Name = twitchSubNames[UnityEngine.Random.Range(0, twitchSubNames.Count - 1)].Name,
                 IssueLeft = StartingIssue,
-                Satisfaction = StartingSatisfaction
+                Satisfaction = StartingSatisfaction,
+                Prototype = this
             };
             Spawned = true;
             return customer;

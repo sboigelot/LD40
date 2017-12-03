@@ -18,7 +18,7 @@ namespace Assets.Scripts.UI
         public GameObject ContactWindow;
         public GameObject ReportWindow;
 
-        public void OpenChatWindow(Customer customer)
+        public ChatWindowController OpenChatWindow(IContact customer)
         {
             var newChat = Instantiate(ChatWindowTemplate, ChatWindowTemplate.transform.parent);
             
@@ -39,7 +39,10 @@ namespace Assets.Scripts.UI
                 newChat.transform.Translate(12f, -12f, 0f);
             }
 
-            newChat.GetComponent<ChatWindowController>().OpenContextualWindow(customer);
+            var chatWindow = newChat.GetComponent<ChatWindowController>();
+            chatWindow.OpenContextualWindow(customer);
+
+            return chatWindow;
         }
 
         public void Update()
@@ -50,6 +53,11 @@ namespace Assets.Scripts.UI
                 dayTime.Hours < 12 ? dayTime.Hours : dayTime.Hours - 12,
                 dayTime.Minutes,
                 dayTime.Hours <= 12 ? "AM" : "PM");
+        }
+
+        public void ShowDailyReport(int dayTimeDays)
+        {
+            
         }
     }
 }

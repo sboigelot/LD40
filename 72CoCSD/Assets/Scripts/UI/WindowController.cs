@@ -25,6 +25,12 @@ namespace Assets.Scripts.UI
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            FocusWindowAndInput();
+        }
+
+        public virtual void FocusWindowAndInput()
+        {
+            gameObject.SetActive(true);
             transform.SetAsLastSibling();
         }
 
@@ -42,16 +48,14 @@ namespace Assets.Scripts.UI
 
         public void OpenWindow()
         {
+            FocusWindowAndInput();
             OnOpen();
-            gameObject.SetActive(true);
-            transform.SetAsLastSibling();
         }
 
         public void OpenContextualWindow(object context)
         {
+            FocusWindowAndInput();
             OnOpen(context);
-            gameObject.SetActive(true);
-            transform.SetAsLastSibling();
         }
     }
 }

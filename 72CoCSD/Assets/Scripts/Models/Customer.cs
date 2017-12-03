@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Assets.Scripts.Managers;
+using Assets.Scripts.UI;
+using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
@@ -18,15 +21,27 @@ namespace Assets.Scripts.Models
 
         public Issue CurrentIssue;
 
+        public ContactItemController ContactItemController;
+
         public string Speak()
         {
             IssueLeft--;
             if (IssueLeft < 0)
             {
-                return string.Format("<color=blue>{0} left the chat</color>", Name);
+                return "";
             }
 
-            CurrentIssue = GameManager.Instance.Game.Issues[UnityEngine.Random.Range(0, 99)];
+            var possibleIssues = GameManager.Instance.Game.Issues.Where(i => i.Complexity <= Prototype.MaxComplexity &&
+                                                                             i.Complexity >= Prototype.MinComplexity)
+                .ToList();
+
+            if (!possibleIssues.Any())
+            {
+                Debug.LogError("No possible issue found for this customer - disconecting");
+                return "";
+            }
+
+            CurrentIssue = possibleIssues[UnityEngine.Random.Range(0, possibleIssues.Count - 1)];
             return CurrentIssue.Question.ToString();
         }
 
@@ -42,6 +57,7 @@ namespace Assets.Scripts.Models
 
             if (correctAnswer == playerText)
             {
+                ImpactSatisfaction(PrototypeManager.Instance.GameSettings.SatisfactionGainPerCorrectAnswer);
                 return 1f;
             }
 
@@ -52,12 +68,44 @@ namespace Assets.Scripts.Models
                 //if there is difference in length of words, validate witch contains of chars
             }
 
+            ImpactSatisfaction(PrototypeManager.Instance.GameSettings.SatisfactionGainPerIncorrectAnswer);
             return 0f;
         }
 
         public string GetLastSentence()
         {
             return CurrentIssue == null ? "" : CurrentIssue.Question.ToString();
+        }
+
+        public void ImpactSatisfaction(float value)
+        {
+            Satisfaction += value;
+            if (Satisfaction <= 0)
+            {
+                RageQuit();
+            }
+        }
+
+        public void RageQuit()
+        {
+            if (ContactItemController != null)
+            {
+                var report = GameManager.Instance.Game.TodayReport;
+                report.FailedCustomers++;
+                Satisfaction = 0;
+                ContactItemController.Disconect();
+            }
+        }
+
+        public void QuitSatified()
+        {
+            if (ContactItemController != null)
+            {
+                var report = GameManager.Instance.Game.TodayReport;
+                report.ServeCustomers++;
+                report.TotalSatisfaction += Satisfaction;
+                ContactItemController.Disconect();
+            }
         }
     }
 }

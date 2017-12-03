@@ -18,7 +18,10 @@ namespace Assets.Scripts.Models
 
         public float Complexity
         {
-            get { return Question.Complexity + 4 * Answer.Complexity; }
+            get
+            {
+                return Question.Complexity + 4 * Answer.Complexity;
+            }
         }
 
         public void Initialise(List<Word> vocabulary)

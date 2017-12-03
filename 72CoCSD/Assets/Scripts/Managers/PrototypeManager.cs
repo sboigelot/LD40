@@ -17,6 +17,11 @@ namespace Assets.Scripts.Managers
 
         public List<CustomerSpawn> CustomerSpawns;
 
+        public List<TwitchSubName> TwitchSubNames;
+
+        public GameSettings GameSettings;
+        public bool Loaded = false;
+
         public IEnumerator LoadPrototypes(Action onLoadCompleted)
         {
             VowelPrototypes = new List<WordPart>();
@@ -40,6 +45,22 @@ namespace Assets.Scripts.Managers
                 yield return s;
             }
 
+            TwitchSubNames = new List<TwitchSubName>();
+            sub = Load<List<TwitchSubName>, TwitchSubName>(TwitchSubNames, "TwitchSubNames.xml");
+            foreach (var s in sub)
+            {
+                yield return s;
+            }
+
+            var settings = new List<GameSettings>();
+            sub = Load<List<GameSettings>, GameSettings>(settings, "GameSettings.xml");
+            foreach (var s in sub)
+            {
+                yield return s;
+            }
+            GameSettings = settings.First();
+
+            Loaded = true;
             if (onLoadCompleted != null)
             {
                 onLoadCompleted();

@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Managers;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Managers;
+using Assets.Scripts.Models;
 using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,15 +16,44 @@ namespace Assets.Scripts.UI
 
         public void Rebuild()
         {
-            CustomerPanel.ClearChildren(1);
+            var remainingCustomers = ClearDisconectedCustomer();
 
             var customers = GameManager.Instance.Game.CustomerQueue;
-            foreach (var customer in customers)
+            foreach (var customer in customers.Where(c=>!remainingCustomers.Contains(c)))
             {
                 var customerCard = Instantiate(CustomerTemplate, CustomerPanel);
                 customerCard.GetComponent<ContactItemController>().SetupForCustomer(customer);
                 customerCard.SetActive(true);
             }
+        }
+
+        private List<Customer> ClearDisconectedCustomer()
+        {
+            var remainingCustomers = new List<Customer>();
+
+            CustomerPanel.ClearChildren(1);
+            for (var i = 1; i < transform.childCount; i++)
+            {
+                var contactCard = transform.GetChild(i);
+                var customerController = contactCard.GetComponent<ContactItemController>();
+                if (customerController != null)
+                {
+                    if (customerController.Contact == null)
+                    {
+                        Object.Destroy(transform.GetChild(i).gameObject);
+                    }
+                    else
+                    {
+                        var customer = customerController.Contact as Customer;
+                        if (customer != null)
+                        {
+                            remainingCustomers.Add(customer);
+                        }
+                    }
+                }
+            }
+
+            return remainingCustomers;
         }
     }
 }

@@ -1,0 +1,11 @@
+<ArrayOfGameSettings>
+
+  <GameSettings
+        MinutesPerGameTime="1"
+        SatisfactionLossPerGameTime="1"
+        SatisfactionGainPerCorrectAnswer="10"
+        SatisfactionGainPerIncorrectAnswer="2"
+        NumberOfPossibleIssues="100"
+        NumberOfPossibleWords="100"/>
+  
+</ArrayOfGameSettings>

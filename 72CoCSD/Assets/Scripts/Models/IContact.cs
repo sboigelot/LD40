@@ -7,5 +7,6 @@ namespace Assets.Scripts.Models
         float Read(string playerText);
         string Speak();
         string GetLastSentence();
+        void QuitSatified();
     }
 }
