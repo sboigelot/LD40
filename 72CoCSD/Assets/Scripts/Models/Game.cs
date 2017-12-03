@@ -178,11 +178,20 @@ namespace Assets.Scripts.Models
             if(PrototypeManager.Instance.CustomerSpawns == null)
                 return;
 
-            var customersToSpawn = 
+            var customerOfTheDay =
                 PrototypeManager.Instance.CustomerSpawns
                 .Where(cs => !cs.Spawned &&
-                             cs.SpawnTime <= DayTime)
+                             cs.SpawnTime.Days == DayTime.Days)
                 .ToList();
+
+            if (!customerOfTheDay.Any() && !CustomerQueue.Any())
+            {
+                PrototypeManager.Instance.GetDialogWithId("AllCustomerDealtWith").OpenChat();
+                EndOfTheDay();
+                return;
+            }
+
+            var customersToSpawn = customerOfTheDay.Where(cs => cs.SpawnTime <= DayTime).ToList();
 
             foreach (var customerSpawn in customersToSpawn)
             {

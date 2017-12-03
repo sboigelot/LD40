@@ -11,4 +11,14 @@
           ForcedAnswer="I'm done"/>
   </Dialog>
 
+  <Dialog Id="AllCustomerDealtWith"
+        CollegueName="James"
+        PauseGame="true">
+    <Line OverrideSpeaker="James"
+          Question="You dealt with every customer for you today, you can go home and come back tomorrow"
+          ForcedAnswer="ok... thanks"/>
+    <Line OverrideSpeaker="System"
+          Question="Close this window to skip to the next day"
+          ForcedAnswer="will do"/>
+  </Dialog>
 </ArrayOfDialog>
