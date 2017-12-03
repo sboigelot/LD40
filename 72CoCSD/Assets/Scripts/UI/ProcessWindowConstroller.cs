@@ -7,17 +7,14 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
 {
-    [RequireComponent(typeof(WindowController))]
-    public class ProcessWindowConstroller : MonoBehaviour
+    public class ProcessWindowConstroller : WindowController
     {
         public Transform IssuesPanel;
         public GameObject IssueTemplate;
         public string IssueTextFormat = "<color=red>Question:</color> {0}\n<color=green>Answer:</color> {1}";
-
-        public void Awake()
+        
+        protected override void OnOpen()
         {
-            //TODO investigate this doesn't work
-            //GetComponent<WindowController>().OnOpen = Rebuild;
             Rebuild();
         }
 

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.Scripts.Managers;
+using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
 {
-    public class DesktopController : MonoBehaviour
+    public class DesktopController : MonoBehaviourSingleton<DesktopController>
     {
         public Text ClockText;
 
@@ -17,10 +18,10 @@ namespace Assets.Scripts.UI
         public GameObject ContactWindow;
         public GameObject ReportWindow;
 
-        public void OpenChatWindow()
+        public void OpenChatWindow(Customer customer)
         {
             var newChat = Instantiate(ChatWindowTemplate, ChatWindowTemplate.transform.parent);
-
+            
             var moveLeft = 50;
             var otherWindows = ChatWindowTemplate
                 .transform
@@ -38,7 +39,7 @@ namespace Assets.Scripts.UI
                 newChat.transform.Translate(12f, -12f, 0f);
             }
 
-            newChat.GetComponent<WindowController>().OpenWindow();
+            newChat.GetComponent<ChatWindowController>().OpenContextualWindow(customer);
         }
 
         public void Update()

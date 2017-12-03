@@ -8,7 +8,20 @@ namespace Assets.Scripts.UI
     {
         public bool DestroyOnClose;
 
-        public Action OnOpen;
+        protected virtual void OnOpen()
+        {
+
+        }
+
+        protected virtual void OnOpen(object context)
+        {
+
+        }
+
+        protected virtual void OnClose()
+        {
+
+        }
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -29,11 +42,14 @@ namespace Assets.Scripts.UI
 
         public void OpenWindow()
         {
-            if (OnOpen != null)
-            {
-                OnOpen();
-            }
+            OnOpen();
+            gameObject.SetActive(true);
+            transform.SetAsLastSibling();
+        }
 
+        public void OpenContextualWindow(object context)
+        {
+            OnOpen(context);
             gameObject.SetActive(true);
             transform.SetAsLastSibling();
         }
