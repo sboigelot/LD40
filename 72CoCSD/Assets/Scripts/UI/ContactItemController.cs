@@ -12,6 +12,8 @@ namespace Assets.Scripts.UI
 
         public ChatWindowController ChatWindow;
 
+        public CustomerProgressController CustomerProgressController;
+
         public void SetupForCustomer(Customer customer)
         {
             Contact = customer;
@@ -40,7 +42,8 @@ namespace Assets.Scripts.UI
             var customer = Contact as Customer;
             if (customer != null)
             {
-                CustomerNameText.text = Contact.Name + " (" + Mathf.Round(customer.Satisfaction) + ")";
+                CustomerNameText.text = customer.Name;
+                CustomerProgressController.Refresh(customer);
                 return;
             }
             
@@ -57,12 +60,18 @@ namespace Assets.Scripts.UI
             var customer = Contact as Customer;
             if (customer != null)
             {
-                if(ChatWindow != null)
+                if (ChatWindow != null)
                 {
-                    ChatWindow.StartCoroutine(
-                    ChatWindow.WriteLineIn("blue", "System",
-                        string.Format("<color=blue>{0} left the chat with a satisfaction of {1}</color>", Contact.Name, customer.Satisfaction),
-                        1));
+                    ChatWindow.WriteLine(
+                        ChatWindow.GetTimeString(),
+                        "blue",
+                        "System",
+                        string.Format("<color=blue>{0} left the chat with a satisfaction of {1}</color>", Contact.Name,
+                            Mathf.Round(customer.Satisfaction)));
+                }
+                else
+                {
+                    Debug.LogWarning("ChatWindow not found on disconecting customer "+customer.Name);
                 }
                 GameManager.Instance.Game.CustomerQueue.Remove(customer);
             }

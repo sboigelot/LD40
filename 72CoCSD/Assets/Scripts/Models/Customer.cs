@@ -22,7 +22,7 @@ namespace Assets.Scripts.Models
         public Issue CurrentIssue;
 
         public ContactItemController ContactItemController;
-
+        
         public ChatLine Speak()
         {
             IssueLeft--;
@@ -64,7 +64,7 @@ namespace Assets.Scripts.Models
             {
                 return 1f;
             }
-
+            
             var correctAnswer = CurrentIssue.Answer.ToString();
             playerText = playerText.ToLower();
 
@@ -75,14 +75,48 @@ namespace Assets.Scripts.Models
             }
 
             int validChar = 0;
-            for (int i = 0; i < correctAnswer.Length; i++)
+
+            var playerWords = playerText.Split(' ').ToList();
+            var answerWords = CurrentIssue.Answer.Words;
+
+            if (playerWords.Count != answerWords.Count)
             {
-                //TODO Split and calculate per words
-                //if there is difference in length of words, validate witch contains of chars
+                ImpactSatisfaction(PrototypeManager.Instance.GameSettings.SatisfactionGainPerIncorrectAnswer);
+                return 0f;
+            }
+
+            var effectivenes = 0f;
+            for (var index = 0; index < playerWords.Count; index++)
+            {
+                var playerWord = playerWords[index];
+                var answerWord = answerWords[index].Text;
+                var wordPonderation = 1f / playerWords.Count;
+
+                if (playerWord == answerWord)
+                {
+                    effectivenes += wordPonderation;
+                }
+                else
+                {
+                    foreach (var answerChar in answerWord)
+                    {
+                        var charPonderation = wordPonderation / answerWord.Length;
+                        if (playerWord.Contains(answerChar))
+                        {
+                            effectivenes += charPonderation;
+                        }
+                    }
+                }
+            }
+
+            if (effectivenes >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance)
+            {
+                ImpactSatisfaction(PrototypeManager.Instance.GameSettings.SatisfactionGainPerCorrectAnswer * effectivenes);
+                return effectivenes;
             }
 
             ImpactSatisfaction(PrototypeManager.Instance.GameSettings.SatisfactionGainPerIncorrectAnswer);
-            return 0f;
+            return effectivenes;
         }
 
         public ChatLine GetLastSentence()
