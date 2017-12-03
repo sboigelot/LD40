@@ -33,6 +33,7 @@ namespace Assets.Scripts.Models
         {
             DayTime = new TimeSpan(DayStart.Ticks);
             ResetCustomerSpawns();
+            ResetEvents();
             GenerateVocabulary();
             GenerateIssues();
             CustomerQueue = new List<Customer>();
@@ -43,6 +44,14 @@ namespace Assets.Scripts.Models
                 new DailyReport()
             };
             UnlockNewIssues(5, 0, 40);
+        }
+
+        private void ResetEvents()
+        {
+            foreach (var eventToReset in PrototypeManager.Instance.Events)
+            {
+                eventToReset.Triggered = false;
+            }
         }
 
         private void UnlockNewIssues(int count, int minComplexity, int maxComplexity)
@@ -117,6 +126,7 @@ namespace Assets.Scripts.Models
                     EndOfTheDay();
                 }
 
+                TriggerEvents();
                 SpawnCustomers();
                 UpdateCustomerSatisfaction();
             }
@@ -135,6 +145,23 @@ namespace Assets.Scripts.Models
             foreach (var customer in CustomerQueue.ToList())
             {
                 customer.RageQuit();
+            }
+        }
+
+        private void TriggerEvents()
+        {
+            if (PrototypeManager.Instance.Events == null)
+                return;
+
+            var eventToTriggers =
+                PrototypeManager.Instance.Events
+                .Where(cs => !cs.Triggered &&
+                             cs.TriggerTime <= DayTime)
+                .ToList();
+
+            foreach (var eventToTrigger in eventToTriggers)
+            {
+                eventToTrigger.Trigger();
             }
         }
 

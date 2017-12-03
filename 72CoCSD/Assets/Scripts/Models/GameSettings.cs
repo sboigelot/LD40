@@ -23,5 +23,8 @@ namespace Assets.Scripts.Models
 
         [XmlAttribute]
         public int NumberOfPossibleWords = 100;
+
+        [XmlAttribute]
+        public float AnswerDeviationTolerance = .9f;
     }
 }

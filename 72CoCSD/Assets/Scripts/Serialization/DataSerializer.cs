@@ -82,6 +82,7 @@ namespace Assets.Scripts.Serialization
             {
                 typeof(CustomerSpawn),
                 typeof(WordPart),
+                typeof(DialogLine),
             };
         }
     }

@@ -1,3 +1,5 @@
+using Assets.Scripts.UI;
+
 namespace Assets.Scripts.Models
 {
     public interface IContact
@@ -5,8 +7,9 @@ namespace Assets.Scripts.Models
         string Name { get; }
         string NextForcedPlayerInput { get; }
         float Read(string playerText);
-        string Speak();
-        string GetLastSentence();
+        ChatLine Speak();
+        ChatLine GetLastSentence();
         void QuitSatified();
+        ChatWindowController ChatWindow { get; set; }
     }
 }

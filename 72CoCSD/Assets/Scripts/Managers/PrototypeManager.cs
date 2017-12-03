@@ -19,6 +19,10 @@ namespace Assets.Scripts.Managers
 
         public List<TwitchSubName> TwitchSubNames;
 
+        public List<Dialog> Dialogs;
+
+        public List<Event> Events;
+
         public GameSettings GameSettings;
         public bool Loaded = false;
 
@@ -52,6 +56,20 @@ namespace Assets.Scripts.Managers
                 yield return s;
             }
 
+            Dialogs = new List<Dialog>();
+            sub = Load<List<Dialog>, Dialog>(Dialogs, "Dialogs.xml");
+            foreach (var s in sub)
+            {
+                yield return s;
+            }
+
+            Events = new List<Event>();
+            sub = Load<List<Event>, Event>(Events, "Events.xml");
+            foreach (var s in sub)
+            {
+                yield return s;
+            }
+
             var settings = new List<GameSettings>();
             sub = Load<List<GameSettings>, GameSettings>(settings, "GameSettings.xml");
             foreach (var s in sub)
@@ -75,6 +93,11 @@ namespace Assets.Scripts.Managers
             {
                 yield return s;
             }
+        }
+
+        public Dialog GetDialogWithId(string id)
+        {
+            return Dialogs.FirstOrDefault(d => d.Id == id);
         }
     }
 }

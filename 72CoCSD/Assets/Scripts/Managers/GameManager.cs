@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Models;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,12 @@ namespace Assets.Scripts.Managers
             {
                 Game.Update(Time.deltaTime);
             }
+        }
+
+        public void OpenTrainBot()
+        {
+            var botDialog = PrototypeManager.Instance.GetDialogWithId("Tr@inBot");
+            botDialog.OpenChat();
         }
     }
 }

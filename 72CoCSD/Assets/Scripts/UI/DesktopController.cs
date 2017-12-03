@@ -47,7 +47,14 @@ namespace Assets.Scripts.UI
 
         public void Update()
         {
+            if (GameManager.Instance.Game.Paused)
+            {
+                ClockText.text = "Game paused";
+                return;
+            }
+
             var dayTime = GameManager.Instance.Game.DayTime;
+
             ClockText.text = string.Format("Day {0} - {1:00}:{2:00} {3}",
                 dayTime.Days,
                 dayTime.Hours <= 12 ? dayTime.Hours : dayTime.Hours - 12,

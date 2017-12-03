@@ -1,0 +1,14 @@
+<ArrayOfDialog>
+
+  <Dialog Id="Tr@inBot"
+        CollegueName="Tr@in Bot"
+        PauseGame="true">
+    <Line OverrideSpeaker="James"
+          Question="How are you?"
+          ForcedAnswer="fine and you?"/>
+    <Line OverrideSpeaker="James"
+          Question="Open the ProCes7 program and tell me when you had a look at it"
+          ForcedAnswer="I'm done"/>
+  </Dialog>
+
+</ArrayOfDialog>

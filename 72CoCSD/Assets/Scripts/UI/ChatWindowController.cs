@@ -21,13 +21,22 @@ namespace Assets.Scripts.UI
         {
             Input.onValidateInput += OnValidateInput;
             ChatText.text = "";
-            Contact = (Customer)context;
+            Contact = (IContact)context;
+            Contact.ChatWindow = this;
             WriteNextLine(0);
         }
 
         private char OnValidateInput(string text, int charIndex, char addedChar)
         {
             var forced = Contact.NextForcedPlayerInput;
+
+            if (GameManager.Instance.Game.Paused && 
+                Contact is Customer)
+            {
+                forced =
+                    "You can't speak to customer while the game is pause, stop speaking to collegues and bots to unpause the game";
+            }
+            
 
             if (string.IsNullOrEmpty(forced))
                 return addedChar;
@@ -39,7 +48,7 @@ namespace Assets.Scripts.UI
         {
             var nextLine = Contact.Speak();
 
-            if (string.IsNullOrEmpty(nextLine))
+            if (nextLine == null)
             {
                 Contact.QuitSatified();
                 Input.enabled = false;
@@ -47,7 +56,7 @@ namespace Assets.Scripts.UI
             }
 
             StartCoroutine(
-                WriteLineIn("red", Contact.Name, nextLine, delayInSeconds));
+                WriteLineIn("red", nextLine.Author, nextLine.Text, delayInSeconds));
         }
 
         public void Send()
@@ -61,17 +70,19 @@ namespace Assets.Scripts.UI
             string playerText = Input.text.Trim();
             WriteLine(time, "green","Player", playerText);
 
-            if(Contact != null && Contact.Read(playerText) >= .9f)
+            if(Contact != null && 
+               Contact.Read(playerText) >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance)
             {
                 WriteNextLine(2);
             }
             else
             {
+                var last = Contact.GetLastSentence();
                 StartCoroutine(
                     WriteLineIn(
                         "red",
-                        Contact.Name,
-                        Contact.GetLastSentence().ToUpper(),
+                        last.Author,
+                        last.Text.ToUpper(),
                         2));
             }
 

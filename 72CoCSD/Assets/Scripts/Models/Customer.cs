@@ -23,12 +23,12 @@ namespace Assets.Scripts.Models
 
         public ContactItemController ContactItemController;
 
-        public string Speak()
+        public ChatLine Speak()
         {
             IssueLeft--;
             if (IssueLeft < 0)
             {
-                return "";
+                return null;
             }
 
             var possibleIssues =
@@ -51,7 +51,11 @@ namespace Assets.Scripts.Models
                 CurrentIssue = possibleIssues[UnityEngine.Random.Range(0, possibleIssues.Count - 1)];
             }
 
-            return CurrentIssue.Question.ToString();
+            return new ChatLine
+            {
+                Author = Name,
+                Text = CurrentIssue.Question.ToString()
+            };
         }
 
         public float Read(string playerText)
@@ -81,9 +85,13 @@ namespace Assets.Scripts.Models
             return 0f;
         }
 
-        public string GetLastSentence()
+        public ChatLine GetLastSentence()
         {
-            return CurrentIssue == null ? "" : CurrentIssue.Question.ToString();
+            return CurrentIssue == null ? null : new ChatLine
+            {
+                Author = Name,
+                Text = CurrentIssue.Question.ToString()
+            };
         }
 
         public void ImpactSatisfaction(float value)
@@ -116,5 +124,7 @@ namespace Assets.Scripts.Models
                 ContactItemController.Disconect();
             }
         }
+
+        public ChatWindowController ChatWindow { get; set; }
     }
 }

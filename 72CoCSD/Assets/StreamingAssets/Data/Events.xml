@@ -1,0 +1,12 @@
+<ArrayOfEvent>
+
+  <Event TriggerDay="0"
+        TriggerHour="8"
+        TriggerMinute="0"
+        Triggered="false"
+        UnlockIssue="5"
+        UnlockIssueMaxComplexity="40"
+        TriggerDialogName="IntroWithJames"
+        OpenReportWindow="false"/>
+
+</ArrayOfEvent>

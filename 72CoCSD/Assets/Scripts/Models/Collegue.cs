@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
+using Assets.Scripts.Managers;
+using Assets.Scripts.UI;
 
 namespace Assets.Scripts.Models
 {
@@ -10,6 +12,8 @@ namespace Assets.Scripts.Models
     {
         [XmlAttribute]
         public string Name { get; set; }
+
+        public string DefaultName { get; set; }
 
         [XmlAttribute]
         public List<Dialog> Dialogs;
@@ -24,29 +28,45 @@ namespace Assets.Scripts.Models
             return 1f;
         }
 
-        public string Speak()
+        public ChatLine Speak()
         {
-            //only support one dialog for now
             CurrentDialog = Dialogs.FirstOrDefault();
 
-            if (CurrentDialog == null || CurrentDialog.MoveNext())
+            if (CurrentDialog == null || !CurrentDialog.MoveNext())
             {
-                return "";
+                Dialogs.RemoveAt(0);
+                return null;
             }
-
-            Dialogs.RemoveAt(0);
+            
             NextForcedPlayerInput = CurrentDialog.CurrentLine.ForcedAnswer;
-            return CurrentDialog.CurrentLine.Question;
+            return new ChatLine
+            {
+                Author = CurrentDialog.CurrentLine.OverrideSpeaker ?? Name,
+                Text = CurrentDialog.CurrentLine.Question
+            };
         }
 
-        public string GetLastSentence()
+        public ChatLine GetLastSentence()
         {
-            return CurrentDialog == null || CurrentDialog.CurrentLine == null ? "" : CurrentDialog.CurrentLine.Question;
+            return
+                CurrentDialog == null || CurrentDialog.CurrentLine == null
+                    ? null
+                    : new ChatLine
+                    {
+                        Author = CurrentDialog.CurrentLine.OverrideSpeaker ?? Name,
+                        Text = CurrentDialog.CurrentLine.Question
+                    };
         }
 
         public void QuitSatified()
         {
-            
+            GameManager.Instance.Game.Paused = false;
+            ChatWindow.StartCoroutine(
+            ChatWindow.WriteLineIn("blue", "System",
+                string.Format("<color=blue>{0} left the chat</color>", Name),
+                1));
         }
+
+        public ChatWindowController ChatWindow { get; set; }
     }
 }
