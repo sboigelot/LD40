@@ -3,7 +3,7 @@
   <CustomerSpawn
         SpawnDay="0"
         SpawnHour="8"
-        SpawnMinute="10"
+        SpawnMinute="3"
         Name="@nthon"
         Spawned="false"
         MinComplexity="0"

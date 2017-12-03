@@ -87,14 +87,7 @@ namespace Assets.Scripts.Models
 
             foreach (var customerSpawn in customersToSpawn)
             {
-                var customer = new Customer
-                {
-                    Name = "Customer",
-                    IssueLeft = customerSpawn.StartingIssue,
-                    Satisfaction = customerSpawn.StartingSatisfaction,
-                    Prototype = customerSpawn
-                };
-                customerSpawn.Spawned = true;
+                var customer = customerSpawn.SpawnCustomer();
                 CustomerQueue.Add(customer);
                 ContactWindowController.Instance.Rebuild();
             }

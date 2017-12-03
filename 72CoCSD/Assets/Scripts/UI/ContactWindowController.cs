@@ -19,9 +19,8 @@ namespace Assets.Scripts.UI
             foreach (var customer in customers)
             {
                 var customerCard = Instantiate(CustomerTemplate, CustomerPanel);
-                customerCard.GetComponentInChildren<Text>().text = customer.Prototype.SpawnTime.ToString();
+                customerCard.GetComponent<ContactItemController>().SetupForCustomer(customer);
                 customerCard.SetActive(true);
-                //TODO setup customercontroller
             }
         }
     }

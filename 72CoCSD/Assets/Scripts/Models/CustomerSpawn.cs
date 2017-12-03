@@ -41,5 +41,17 @@ namespace Assets.Scripts.Models
 
         [XmlAttribute]
         public float StartingSatisfaction;
+
+        public Customer SpawnCustomer()
+        {
+            var customer = new Customer
+            {
+                Name = Name,
+                IssueLeft = StartingIssue,
+                Satisfaction = StartingSatisfaction
+            };
+            Spawned = true;
+            return customer;
+        }
     }
 }

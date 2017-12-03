@@ -3871,7 +3871,7 @@ GameObject:
   - component: {fileID: 376059151}
   - component: {fileID: 376059150}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CustomerNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5854,6 +5854,13 @@ MonoBehaviour:
       StartingIssue: 0
       LanguageProficiency: 0
       StartingSatisfaction: 0
+    CurrentIssue:
+      Question:
+        Words: []
+      Answer:
+        Words: []
+      Unlocked: 0
+  CustomerNameText: {fileID: 376059150}
 --- !u!1 &587961349
 GameObject:
   m_ObjectHideFlags: 0
@@ -13562,10 +13569,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.2
-  m_Text: '<color=red>11:29:00</color> <color=blue>@ntho:</color> Klidn houd ? tenis
+  m_Text: <color=red>11:29:00</color> <color=blue>@ntho:</color> Klidn houd ? tenis
     de!
-
-'
 --- !u!222 &1453907538
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14420,12 +14425,12 @@ MonoBehaviour:
       StartingIssue: 0
       LanguageProficiency: 0
       StartingSatisfaction: 0
-  CurrentIssue:
-    Question:
-      Words: []
-    Answer:
-      Words: []
-    Unlocked: 0
+    CurrentIssue:
+      Question:
+        Words: []
+      Answer:
+        Words: []
+      Unlocked: 0
 --- !u!1 &1563752427
 GameObject:
   m_ObjectHideFlags: 0

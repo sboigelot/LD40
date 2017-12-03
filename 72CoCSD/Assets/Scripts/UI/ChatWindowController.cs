@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Models;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
@@ -11,19 +13,39 @@ namespace Assets.Scripts.UI
         public Text ChatText;
         public InputField Input;
 
-        public Customer Customer;
-        public Issue CurrentIssue;
+        public IContact Contact;
 
         protected override void OnOpen(object context)
         {
-            Customer = (Customer)context;
-            NextIssue();
+            Input.onValidateInput += OnValidateInput;
+            ChatText.text = "";
+            Contact = (Customer)context;
+            WriteNextLine();
         }
 
-        private void NextIssue()
+        private char OnValidateInput(string text, int charIndex, char addedChar)
         {
-            CurrentIssue = GameManager.Instance.Game.Issues[UnityEngine.Random.Range(0, 99)];
-            WriteLine(GetTimeString(), "red", "Customer", CurrentIssue.Question.ToString());
+            var forced = Contact.NextForcedPlayerInput;
+
+            if (string.IsNullOrEmpty(forced))
+                return addedChar;
+
+            return forced.Length > charIndex ? forced[charIndex] : ' ';
+        }
+
+        private void WriteNextLine()
+        {
+            var nextLine = Contact.Speak();
+
+            if (string.IsNullOrEmpty(nextLine))
+            {
+                WriteLine(GetTimeString(), "blue", "System", 
+                    string.Format("<color=blue>{0} left the chat</color>", Contact.Name));
+                Input.enabled = false;
+                return;
+            }
+            
+            WriteLine(GetTimeString(), "red", Contact.Name, nextLine);
         }
 
         public void Send()
@@ -36,13 +58,13 @@ namespace Assets.Scripts.UI
             string time = GetTimeString();
             WriteLine(time, "green","Player", Input.text);
 
-            if (ValidateAnswer(Input.text) >= .9f)
+            if(Contact.Read(Input.text) >= .9f)
             {
-                NextIssue();
+                WriteNextLine();
             }
             else
             {
-                WriteLine(time, "red", "Customer", CurrentIssue.Question.ToString().ToUpper());
+                WriteLine(time, "red", Contact.Name, Contact.GetLastSentence().ToUpper());
             }
 
             Input.text = "";
@@ -58,32 +80,7 @@ namespace Assets.Scripts.UI
                     dayTime.Hours <= 12 ? "AM" : "PM");
             return time;
         }
-
-        private float ValidateAnswer(string answer)
-        {
-            if (CurrentIssue == null)
-            {
-                return 1f;
-            }
-
-            var correctAnswer = CurrentIssue.Question.ToString();
-            answer = answer.ToLower();
-
-            if (correctAnswer == answer)
-            {
-                return 1f;
-            }
-
-            int validChar = 0;
-            for (int i = 0; i < correctAnswer.Length; i++)
-            {
-                //TODO Split and calculate per words
-                //if there is difference in length of words, validate witch contains of chars
-            }
-
-            return 1f;
-        }
-
+        
         public void WriteLine(string time,string userColor, string user, string text)
         {
             ChatText.text +=
@@ -93,6 +90,12 @@ namespace Assets.Scripts.UI
                     userColor,
                     user,
                     text);
+
+            var lineCount = ChatText.text.Count(c => c == '\n');
+            if (lineCount >= 16)
+            {
+                ChatText.text = ChatText.text.Substring(ChatText.text.IndexOf('\n') + 1);
+            }
         }
     }
 }
