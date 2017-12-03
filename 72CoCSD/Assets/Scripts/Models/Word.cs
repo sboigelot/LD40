@@ -46,6 +46,7 @@ namespace Assets.Scripts.Models
 
             int vCount = 0;
             int cCount = 0;
+            string lastC = "";
 
             for (int j = 0; j <= component; j++)
             {
@@ -57,7 +58,13 @@ namespace Assets.Scripts.Models
                 {
                     vCount++;
                     cCount = 0;
-                    Text += RandomPart(PrototypeManager.Instance.VowelPrototypes).Text;
+                    var c = RandomPart(PrototypeManager.Instance.VowelPrototypes).Text;
+                    while (lastC == c)
+                    {
+                        c = RandomPart(PrototypeManager.Instance.VowelPrototypes).Text;
+                    }
+                    lastC = c;
+                    Text += c;
                 }
                 else
                 {

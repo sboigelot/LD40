@@ -1,7 +1,7 @@
 <ArrayOfGameSettings>
 
   <GameSettings
-        MinutesPerGameTime="1"
+        MinutesPerGameTime="5"
         SatisfactionLossPerGameTime="1"
         SatisfactionGainPerCorrectAnswer="10"
         SatisfactionGainPerIncorrectAnswer="2"

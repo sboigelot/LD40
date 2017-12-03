@@ -4,24 +4,43 @@
         SpawnDay="0"
         SpawnHour="8"
         SpawnMinute="3"
-        Name="@nthon"
         Spawned="false"
         MinComplexity="0"
-        MaxComplexity="30"
+        MaxComplexity="35"
         StartingIssue="2"
         LanguageProficiency="1"
-        StartingSatisfaction="24"/>
+        StartingSatisfaction="240"/>
+
+  <CustomerSpawn
+        SpawnDay="0"
+        SpawnHour="8"
+        SpawnMinute="40"
+        Spawned="false"
+        MinComplexity="0"
+        MaxComplexity="35"
+        StartingIssue="2"
+        LanguageProficiency="1"
+        StartingSatisfaction="240"/>
 
   <CustomerSpawn
         SpawnDay="0"
         SpawnHour="9"
-        SpawnMinute="20"
-        Name="@nthon"
+        SpawnMinute="40"
         Spawned="false"
         MinComplexity="0"
-        MaxComplexity="30"
+        MaxComplexity="50"
+        StartingIssue="2"
+        LanguageProficiency="1"
+        StartingSatisfaction="140"/>
+
+  <CustomerSpawn
+        SpawnDay="0"
+        SpawnHour="9"
+        SpawnMinute="45"
+        Spawned="false"
+        MinComplexity="0"
+        MaxComplexity="35"
         StartingIssue="2"
         LanguageProficiency="1"
         StartingSatisfaction="240"/>
-  
 </ArrayOfCustomerSpawn>

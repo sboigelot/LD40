@@ -17001,6 +17001,7 @@ MonoBehaviour:
   DestroyOnClose: 0
   IssuesPanel: {fileID: 1027786145}
   IssueTemplate: {fileID: 2020166613}
+  Scrollbar: {fileID: 2139674504}
   IssueTextFormat: <color=red>Question:</color> {0}<br><color=green>Answer:</color>
     {1}
 --- !u!1 &1894877861

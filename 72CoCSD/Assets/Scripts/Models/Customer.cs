@@ -31,17 +31,26 @@ namespace Assets.Scripts.Models
                 return "";
             }
 
-            var possibleIssues = GameManager.Instance.Game.Issues.Where(i => i.Complexity <= Prototype.MaxComplexity &&
-                                                                             i.Complexity >= Prototype.MinComplexity)
+            var possibleIssues =
+                GameManager.Instance.Game.Issues.Where(i =>
+                i.Unlocked &&
+                i.Complexity <= Prototype.MaxComplexity &&
+                i.Complexity >= Prototype.MinComplexity)
                 .ToList();
 
             if (!possibleIssues.Any())
             {
-                Debug.LogError("No possible issue found for this customer - disconecting");
-                return "";
+                Debug.LogWarning("No possible issue found for this customer - choose randomly overall");
+                possibleIssues = GameManager.Instance.Game.Issues;
+                CurrentIssue = possibleIssues[UnityEngine.Random.Range(0, possibleIssues.Count - 1)];
+                CurrentIssue.Unlocked = true;
+                ProcessWindowConstroller.Instance.Rebuild();
+            }
+            else
+            {
+                CurrentIssue = possibleIssues[UnityEngine.Random.Range(0, possibleIssues.Count - 1)];
             }
 
-            CurrentIssue = possibleIssues[UnityEngine.Random.Range(0, possibleIssues.Count - 1)];
             return CurrentIssue.Question.ToString();
         }
 

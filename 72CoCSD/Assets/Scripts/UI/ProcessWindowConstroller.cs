@@ -11,10 +11,20 @@ namespace Assets.Scripts.UI
     {
         public Transform IssuesPanel;
         public GameObject IssueTemplate;
+        public Scrollbar Scrollbar;
+
         public string IssueTextFormat = "<color=red>Question:</color> {0}\n<color=green>Answer:</color> {1}";
-        
+
+        public ProcessWindowConstroller()
+        {
+            Instance = this;
+        }
+
+        public static ProcessWindowConstroller Instance { get; set; }
+
         protected override void OnOpen()
         {
+            Scrollbar.value = 1;
             Rebuild();
         }
 
@@ -22,7 +32,7 @@ namespace Assets.Scripts.UI
         {
             IssuesPanel.ClearChildren(2);
 
-            var issues = GameManager.Instance.Game.Issues;
+            var issues = GameManager.Instance.Game.Issues.Where(i=>i.Unlocked);
             foreach (var issue in issues.OrderBy(i=>i.Question.ToString()))
             {
                 var issueCard = Instantiate(IssueTemplate, IssuesPanel);

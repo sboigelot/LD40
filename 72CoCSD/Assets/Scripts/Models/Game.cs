@@ -42,6 +42,37 @@ namespace Assets.Scripts.Models
             {
                 new DailyReport()
             };
+            UnlockNewIssues(5, 0, 40);
+        }
+
+        private void UnlockNewIssues(int count, int minComplexity, int maxComplexity)
+        {
+            var possibleIssue = Issues.Where(
+                issue =>
+                    !issue.Unlocked &&
+                    issue.Complexity >= minComplexity &&
+                    issue.Complexity <= maxComplexity)
+                    .ToList();
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!possibleIssue.Any())
+                {
+                    possibleIssue = Issues.Where(issue => !issue.Unlocked).ToList();
+
+                    if (!possibleIssue.Any())
+                    {
+                        Debug.LogError("No more issue available to unlock");
+                        return;
+                    }
+                }
+
+                var selected = possibleIssue[UnityEngine.Random.Range(0, possibleIssue.Count)];
+                possibleIssue.Remove(selected);
+                selected.Unlocked = true;
+            }
+
+            ProcessWindowConstroller.Instance.Rebuild();
         }
 
         private void ResetCustomerSpawns()
@@ -101,7 +132,7 @@ namespace Assets.Scripts.Models
 
         private void DisconectAllClient()
         {
-            foreach (var customer in CustomerQueue)
+            foreach (var customer in CustomerQueue.ToList())
             {
                 customer.RageQuit();
             }
