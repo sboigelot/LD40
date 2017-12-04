@@ -51,6 +51,7 @@ namespace Assets.Scripts.Models
                 GameManager.Instance.Game.PauseHandle++;
             }
 
+            index = -1;
             var chatWindow = DesktopController.Instance.OpenChatWindow(new Collegue
             {
                 Name = CollegueName,

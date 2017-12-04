@@ -18,7 +18,8 @@
 
   <Dialog Id="Tr@inBot"
         CollegueName="Tr@in Bot"
-        PauseGame="true">
+        PauseGame="true"
+        OverrideMaxLine="6">
     <Line OverrideSpeaker="James"
           Question="Hey you did it! Yes I can speak with you here too. So is your ProCes7 app open too? Did you have a look at it?"
           ForcedAnswer="Yep! open and clear"/>
@@ -27,10 +28,10 @@
           ForcedAnswer="I'm ready"/>
     <Line AckAsLowerComplexityIssue="true"/>
     <Line OverrideSpeaker="James"
-          Question="Congratulation! Now open your SatisIM2 app and close this training app, customer will arrive shortly. Be sure to answer them in time, a waiting customer is an angry customer!"
+          Question="Congratulation! Now open your SatisIM2 app, customer will arrive shortly after we finish chatting. Be sure to answer them in time, a waiting customer is an angry customer!"
           ForcedAnswer="Will do sir! Anything else?"/>
     <Line OverrideSpeaker="James"
-          Question="Yes, one last thing: if you fail to server too much customer in a day, you will get fired on the spot. (you can adjust difficulty and sound settings in the start menu - control panel)"
+          Question="Yes, one last thing: if you fail to server too much customer in a day, you will get fired on the spot. Now close this training app and start your real work! (you can adjust difficulty and sound settings in the start menu - control panel)"
           ForcedAnswer="Ok here I go!"/>
   </Dialog>
 

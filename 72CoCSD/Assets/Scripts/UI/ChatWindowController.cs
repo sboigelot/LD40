@@ -86,7 +86,8 @@ namespace Assets.Scripts.UI
             var effectivenes = ContactBase.Read(playerText);
             var understood = effectivenes >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance;
 
-            string text =
+            var forced = ContactBase.NextForcedPlayerInput;
+            string text = !string.IsNullOrEmpty(forced) ? forced : 
                 ContactBase is Customer
                     ? string.Format("{0}\t\t<i>(<color={1}>{2}</color> {3}% correct)</i>",
                         playerText,

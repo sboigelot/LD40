@@ -23,7 +23,6 @@ namespace Assets.Scripts.UI
             if (Contact.ChatWindow == null)
             {
                 Contact.ChatWindow = DesktopController.Instance.OpenChatWindow(Contact);
-                Debug.Log("Open Chat windows for customer: " + Contact.Name);
             }
             else
             {

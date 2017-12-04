@@ -16,7 +16,8 @@ namespace Assets.Scripts.UI
 
         private void Update()
         {
-            if (wasFocused && Input.GetKeyDown(KeyCode.Return))
+            if (wasFocused && 
+                (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
             {
                 Submit(Field.text);
             }
