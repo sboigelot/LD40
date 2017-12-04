@@ -95,8 +95,9 @@ namespace Assets.Scripts.UI
                     : playerText;
 
             WriteLine(time, "green","Player", text);
+            SoundController.Instance.PlaySound(SoundController.Instance.NewMessage2AudioClip);
 
-            if(understood)
+            if (understood)
             {
                 WriteNextLine(1);
             }
@@ -149,6 +150,7 @@ namespace Assets.Scripts.UI
         public IEnumerator WriteLineIn(string userColor, string user, string text, float delayInSeconds)
         {
             yield return new WaitForSeconds(delayInSeconds);
+            SoundController.Instance.PlaySound(SoundController.Instance.NewMessage1AudioClip);
             WriteLine(GetTimeString(), userColor, user, text);
         }
 

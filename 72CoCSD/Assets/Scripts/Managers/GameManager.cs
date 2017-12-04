@@ -14,6 +14,9 @@ namespace Assets.Scripts.Managers
         public GameObject StartScreenPanel;
         public GameObject GameOverPanel;
         public GameObject GameWonPanel;
+        public GameObject StartMenu;
+        public GameObject Notepad;
+        public GameObject ControlPanel;
 
         public void Start()
         {
@@ -31,6 +34,9 @@ namespace Assets.Scripts.Managers
             DailyReportWindowController.Instance.gameObject.SetActive(false);
             ProcessWindowConstroller.Instance.gameObject.SetActive(false);
             ContactWindowController.Instance.gameObject.SetActive(false);
+            StartMenu.SetActive(false);
+            Notepad.SetActive(false);
+            ControlPanel.SetActive(false);
 
             Game = new Game();
             Game.Initialize();

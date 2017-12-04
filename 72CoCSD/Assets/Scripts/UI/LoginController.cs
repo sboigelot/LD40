@@ -14,6 +14,8 @@ namespace Assets.Scripts.UI
             {
                 LoginPanel.SetActive(false);
                 PasswordInput.text = "";
+
+                SoundController.Instance.PlaySound(SoundController.Instance.StartWinAudioClip);
             }
         }
     }

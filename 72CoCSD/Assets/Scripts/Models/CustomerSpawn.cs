@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using Assets.Scripts.Managers;
+using Assets.Scripts.UI;
 
 namespace Assets.Scripts.Models
 {
@@ -42,6 +43,7 @@ namespace Assets.Scripts.Models
 
         public Customer SpawnCustomer()
         {
+            SoundController.Instance.PlaySound(SoundController.Instance.NewContact1AudioClip);
             var twitchSubNames = PrototypeManager.Instance.TwitchSubNames;
             var customer = new Customer
             {
