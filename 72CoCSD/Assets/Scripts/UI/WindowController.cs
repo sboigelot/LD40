@@ -36,6 +36,7 @@ namespace Assets.Scripts.UI
 
         public void CloseWindow()
         {
+            OnClose();
             if (DestroyOnClose)
             {   
                 Destroy(gameObject);

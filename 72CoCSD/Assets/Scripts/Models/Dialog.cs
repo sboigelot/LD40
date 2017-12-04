@@ -27,6 +27,9 @@ namespace Assets.Scripts.Models
         [XmlIgnore]
         public int index = -1;
 
+        [XmlAttribute]
+        public int OverrideMaxLine;
+
         public bool MoveNext()
         {
             index++;
@@ -48,11 +51,12 @@ namespace Assets.Scripts.Models
                 GameManager.Instance.Game.Paused = true;
             }
 
-            DesktopController.Instance.OpenChatWindow(new Collegue
+            var chatWindow = DesktopController.Instance.OpenChatWindow(new Collegue
             {
                 Name = CollegueName,
                 Dialogs = new List<Dialog> {this}
             });
+            chatWindow.OverrideMaxLine = OverrideMaxLine;
         }
     }
 }

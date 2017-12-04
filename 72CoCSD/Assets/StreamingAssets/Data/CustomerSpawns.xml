@@ -1,46 +1,55 @@
 <ArrayOfCustomerSpawn>
 
+  <!--Day 0-->
   <CustomerSpawn
-        SpawnDay="0"
-        SpawnHour="8"
-        SpawnMinute="3"
-        Spawned="false"
-        MinComplexity="0"
-        MaxComplexity="35"
-        StartingIssue="2"
-        LanguageProficiency="1"
-        StartingSatisfaction="240"/>
+        SpawnDay="0" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="0" MaxComplexity="35"
+        StartingIssue="2" StartingSatisfaction="180"/>
 
   <CustomerSpawn
-        SpawnDay="0"
-        SpawnHour="8"
-        SpawnMinute="40"
-        Spawned="false"
-        MinComplexity="0"
-        MaxComplexity="35"
-        StartingIssue="2"
-        LanguageProficiency="1"
-        StartingSatisfaction="20"/>
+        SpawnDay="0" SpawnHour="8" SpawnMinute="20"
+        MinComplexity="0" MaxComplexity="35"
+        StartingIssue="2" StartingSatisfaction="80"/>
 
   <CustomerSpawn
-        SpawnDay="0"
-        SpawnHour="9"
-        SpawnMinute="40"
-        Spawned="false"
-        MinComplexity="0"
-        MaxComplexity="50"
-        StartingIssue="2"
-        LanguageProficiency="1"
-        StartingSatisfaction="140"/>
+        SpawnDay="0" SpawnHour="8" SpawnMinute="40"
+        MinComplexity="0" MaxComplexity="50"
+        StartingIssue="2" StartingSatisfaction="240"/>
 
   <CustomerSpawn
-        SpawnDay="0"
-        SpawnHour="9"
-        SpawnMinute="45"
-        Spawned="false"
-        MinComplexity="0"
-        MaxComplexity="35"
-        StartingIssue="2"
-        LanguageProficiency="1"
-        StartingSatisfaction="240"/>
+        SpawnDay="0" SpawnHour="10" SpawnMinute="20"
+        MinComplexity="0" MaxComplexity="35"
+        StartingIssue="2" StartingSatisfaction="100"/>
+  
+  <CustomerSpawn
+        SpawnDay="0" SpawnHour="11" SpawnMinute="50"
+        MinComplexity="0" MaxComplexity="55"
+        StartingIssue="2" StartingSatisfaction="280"/>
+
+  <!--Day 1-->
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="0" MaxComplexity="55"
+        StartingIssue="2" StartingSatisfaction="180"/>
+
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="8" SpawnMinute="20"
+        MinComplexity="0" MaxComplexity="55"
+        StartingIssue="2" StartingSatisfaction="80"/>
+
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="8" SpawnMinute="40"
+        MinComplexity="0" MaxComplexity="70"
+        StartingIssue="2" StartingSatisfaction="240"/>
+
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="10" SpawnMinute="20"
+        MinComplexity="0" MaxComplexity="55"
+        StartingIssue="2" StartingSatisfaction="100"/>
+
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="11" SpawnMinute="50"
+        MinComplexity="0" MaxComplexity="75"
+        StartingIssue="2" StartingSatisfaction="280"/>
+
 </ArrayOfCustomerSpawn>

@@ -20,11 +20,18 @@ namespace Assets.Scripts.Models
 
         private Dialog CurrentDialog;
 
+        private Issue SimpliestIssue;
+
         [XmlIgnore]
         public string NextForcedPlayerInput { get; set; }
 
         public float Read(string playerText)
         {
+            if (CurrentDialog.CurrentLine.AckAsLowerComplexityIssue)
+            {
+                return playerText.ToLower() == SimpliestIssue.Answer.ToString() ? 1f : 0f;
+            }
+
             return 1f;
         }
 
@@ -39,10 +46,18 @@ namespace Assets.Scripts.Models
             }
             
             NextForcedPlayerInput = CurrentDialog.CurrentLine.ForcedAnswer;
+
+            if (CurrentDialog.CurrentLine.AckAsLowerComplexityIssue)
+            {
+                SimpliestIssue = GameManager.Instance.Game.Issues.Where(i=> i.Unlocked).OrderBy(i => i.Complexity).First();
+            }
+
             return new ChatLine
             {
                 Author = CurrentDialog.CurrentLine.OverrideSpeaker ?? Name,
-                Text = CurrentDialog.CurrentLine.Question
+                Text = CurrentDialog.CurrentLine.AckAsLowerComplexityIssue
+                    ? SimpliestIssue.Question.ToString()
+                    : CurrentDialog.CurrentLine.Question
             };
         }
 
@@ -54,7 +69,9 @@ namespace Assets.Scripts.Models
                     : new ChatLine
                     {
                         Author = CurrentDialog.CurrentLine.OverrideSpeaker ?? Name,
-                        Text = CurrentDialog.CurrentLine.Question
+                        Text = CurrentDialog.CurrentLine.AckAsLowerComplexityIssue
+                            ? SimpliestIssue.Question.ToString()
+                            : CurrentDialog.CurrentLine.Question
                     };
         }
 

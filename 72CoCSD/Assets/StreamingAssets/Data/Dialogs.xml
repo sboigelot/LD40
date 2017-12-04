@@ -1,14 +1,34 @@
 <ArrayOfDialog>
+  
+  <Dialog Id="IntroWithJames"
+        CollegueName="James"
+        PauseGame="true"
+        OverrideMaxLine="6">
+    <Line Question="Hello there newcomer! Welcome to your new customer satisfaction job at 72Co. If you do well for 5 days, you may get a permanent position here, but I should warn you, not many survives the first few days."
+          ForcedAnswer="Hello... I'll do my best :)"/>
+    <Line Question="I guess you know what you’ll have to do so, I’ll leave you to it. Have fun"
+          ForcedAnswer="What? heu... wait, where am I? what am I suppose to do?"/>
+    <Line Question="Hehe just kidding, as you may now, here at 72Co Customer Satisfaction Departement, we get calls from all over the parallel multiverse and it’s too costly to have expert translators in every languages there is."
+          ForcedAnswer="Sure! That seems obvious!"/>
+    <Line Question="So your job is simple, I’ll give you a procedure to follow while chatting with our dear customers. Try to identify what they are speaking about in the list of pre-made question / answer couple and just type the correct answer in chat."
+          ForcedAnswer="Ok, search the question in the list and type the answer. Go it!"/>
+    <Line Question="That’s as easy as that, chat with them, solve their issues and make them happy. So let’s get you through the training bot first. Close this window, Open the Tr@inBot app on your desktop and the list of procedures (ProCes7). Have fun, I’ll check on you during the day."
+          ForcedAnswer="Here I go.... closing this window... or not? Am I still typing?                   Apparently yes...                I should probably stop now"/>
+  </Dialog>
 
   <Dialog Id="Tr@inBot"
         CollegueName="Tr@in Bot"
         PauseGame="true">
     <Line OverrideSpeaker="James"
-          Question="How are you?"
-          ForcedAnswer="fine and you?"/>
+          Question="Hey you did it! Yes I can speak with you here too. So is your ProCes7 app open too? Did you have a look at it?"
+          ForcedAnswer="Yep! open and clear"/>
     <Line OverrideSpeaker="James"
-          Question="Open the ProCes7 program and tell me when you had a look at it"
-          ForcedAnswer="I'm done"/>
+          Question="The bot will now ask you a question, give the proper answer and we are gold! As soon as you are ready"
+          ForcedAnswer="I'm ready"/>
+    <Line AckAsLowerComplexityIssue="true"/>
+    <Line OverrideSpeaker="James"
+          Question="Congratulation! Now open your SatisIM2 app and close this training app, customer will arrive shortly. Be sure to answer them in time, a waiting customer is an angry customer!"
+          ForcedAnswer="Will do sir!"/>
   </Dialog>
 
   <Dialog Id="AllCustomerDealtWith"

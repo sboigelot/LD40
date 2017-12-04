@@ -48,5 +48,26 @@ namespace Assets.Scripts.UI
                 reportCard.SetActive(true);
             }
         }
+
+        public void FixedUpdate()
+        {
+            var reportCards = ReportsPanel.Cast<Transform>().Skip(2).ToList();
+            var ReportTextFormat = ReportsPanel.GetChild(1).GetComponentInChildren<Text>().text;
+            float runningSum = 0;
+            for (var index = 0; index < reportCards.Count; index++)
+            {
+                var report = GameManager.Instance.Game.DailyReports[index];
+                var reportCard = reportCards[index];
+                runningSum += report.TotalSatisfaction;
+                reportCard.GetComponentInChildren<Text>().text =
+                    string.Format(
+                        ReportTextFormat.Replace("<br>", "\n"),
+                        report.Day,
+                        report.TotalSatisfaction,
+                        report.ServeCustomers,
+                        report.FailedCustomers,
+                        runningSum);
+            }
+        }
     }
 }

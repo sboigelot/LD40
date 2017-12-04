@@ -43,7 +43,7 @@ namespace Assets.Scripts.Models
             {
                 new DailyReport()
             };
-            UnlockNewIssues(5, 0, 40);
+            //now done by events: UnlockNewIssues(5, 0, 40);
         }
 
         private void ResetEvents()
@@ -54,7 +54,7 @@ namespace Assets.Scripts.Models
             }
         }
 
-        private void UnlockNewIssues(int count, int minComplexity, int maxComplexity)
+        public void UnlockNewIssues(int count, int minComplexity, int maxComplexity)
         {
             var possibleIssue = Issues.Where(
                 issue =>

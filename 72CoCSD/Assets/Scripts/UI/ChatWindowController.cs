@@ -20,6 +20,7 @@ namespace Assets.Scripts.UI
 
         public int PlayerMistakeCount;
         public IContact Contact;
+        public int OverrideMaxLine;
 
         protected override void OnOpen(object context)
         {
@@ -29,6 +30,14 @@ namespace Assets.Scripts.UI
             CustomerProgressPanel.SetActive(Contact is Customer);
             Contact.ChatWindow = this;
             WriteNextLine(0);
+        }
+
+        protected override void OnClose()
+        {
+            if (Contact is Collegue)
+            {
+                GameManager.Instance.Game.Paused = false;
+            }
         }
 
         private char OnValidateInput(string text, int charIndex, char addedChar)
@@ -76,11 +85,14 @@ namespace Assets.Scripts.UI
             var effectivenes = Contact.Read(playerText);
             var understood = effectivenes >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance;
 
-            string text = string.Format("{0}\t\t<i>(<color={1}>{2}</color> {3}% correct)</i>",
-                playerText,
-                understood ? "green" : "red",
-                understood ? "V" : "X",
-                Math.Round(effectivenes, 2) * 100);
+            string text =
+                Contact is Customer
+                    ? string.Format("{0}\t\t<i>(<color={1}>{2}</color> {3}% correct)</i>",
+                        playerText,
+                        understood ? "green" : "red",
+                        understood ? "V" : "X",
+                        Math.Round(effectivenes, 2) * 100)
+                    : playerText;
 
             WriteLine(time, "green","Player", text);
 
@@ -91,9 +103,10 @@ namespace Assets.Scripts.UI
             else
             {
                 PlayerMistakeCount++;
-                if (PlayerMistakeCount > 4)
+                var customer = Contact as Customer;
+                if (PlayerMistakeCount > 4 && customer != null)
                 {
-                    ((Customer)Contact).RageQuit();
+                    customer.RageQuit();
                 }
                 else
                 {
@@ -103,7 +116,7 @@ namespace Assets.Scripts.UI
                     {
                         lastText = lastText.ToUpper() + " ";
                     }
-                    var swear = new string[] {"$", "%", "µ", "!", "§"};
+                    var swear = new string[] {"$", "%", "#", "!", "§"};
                     var swearCount = Math.Max(PlayerMistakeCount - 2, 0) * 2;
                     for (int i = 0; i < swearCount; i++)
                     {
@@ -150,7 +163,7 @@ namespace Assets.Scripts.UI
                     text);
 
             var lineCount = ChatText.text.Count(c => c == '\n');
-            if (lineCount >= 16)
+            if (lineCount >= (OverrideMaxLine != 0 ? OverrideMaxLine : 16))
             {
                 ChatText.text = ChatText.text.Substring(ChatText.text.IndexOf('\n') + 1);
             }

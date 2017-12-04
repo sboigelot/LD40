@@ -1,5 +1,7 @@
 using System;
 using System.Xml.Serialization;
+using Assets.Scripts.Managers;
+using Assets.Scripts.UI;
 
 namespace Assets.Scripts.Models
 {
@@ -26,7 +28,7 @@ namespace Assets.Scripts.Models
 
         [XmlAttribute]
         public int UnlockIssue;
-
+        
         [XmlAttribute]
         public float UnlockIssueMaxComplexity;
 
@@ -38,8 +40,21 @@ namespace Assets.Scripts.Models
 
         public void Trigger()
         {
-            //TODO
-            //UnlockNewIssues(5, 0, 40); and disable in Game.Initialize
+            if (UnlockIssue != 0)
+            {
+                GameManager.Instance.Game.UnlockNewIssues(5, 0, 40);
+            }
+
+            if (!string.IsNullOrEmpty(TriggerDialogName))
+            {
+                PrototypeManager.Instance.GetDialogWithId(TriggerDialogName).OpenChat();
+            }
+
+            if (OpenReportWindow)
+            {
+                DailyReportWindowController.Instance.OpenWindow();
+            }
+
             Triggered = true;
         }
     }

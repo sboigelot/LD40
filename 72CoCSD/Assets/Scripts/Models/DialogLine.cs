@@ -14,5 +14,8 @@ namespace Assets.Scripts.Models
 
         [XmlAttribute]
         public string ForcedAnswer;
+
+        [XmlAttribute]
+        public bool AckAsLowerComplexityIssue;
     }
 }

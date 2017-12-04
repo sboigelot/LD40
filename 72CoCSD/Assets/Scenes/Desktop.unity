@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1093444616}
         m_MethodName: CloseWindow
         m_Mode: 1
         m_Arguments:
@@ -17048,6 +17048,7 @@ MonoBehaviour:
   CustomerProgress: {fileID: 1152645701}
   CustomerProgressPanel: {fileID: 1152645697}
   PlayerMistakeCount: 0
+  OverrideMaxLine: 0
 --- !u!1 &1546932964
 GameObject:
   m_ObjectHideFlags: 0
