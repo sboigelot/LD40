@@ -87,7 +87,7 @@ namespace Assets.Scripts.UI
             var effectivenes = ContactBase.Read(playerText);
             var understood = effectivenes >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance;
 
-            var cheat = true;
+            var cheat = false;
             if (cheat)
             {
                 understood = true;
