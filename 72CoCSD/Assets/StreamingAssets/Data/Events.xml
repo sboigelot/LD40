@@ -3,13 +3,15 @@
   <Event TriggerDay="0"
          TriggerHour="8"
          UnlockIssue="5"
-         UnlockIssueMaxComplexity="40"
+         UnlockIssueMinComplexity="0"
+         UnlockIssueMaxComplexity="50"
          TriggerDialogName="IntroWithJames"
          OpenReportWindow="false"/>
 
   <Event TriggerDay="0"
          TriggerHour="17"
          UnlockIssue="3"
+         UnlockIssueMinComplexity="20"
          UnlockIssueMaxComplexity="60"
          TriggerDialogName="EndOfDay"
          OpenReportWindow="false"/>
@@ -24,6 +26,7 @@
          TriggerHour="17"
          Triggered="false"
          UnlockIssue="5"
+         UnlockIssueMinComplexity="20"
          UnlockIssueMaxComplexity="60"
          TriggerDialogName="EndOfDay"
          OpenReportWindow="false"/>
@@ -31,13 +34,24 @@
   <Event TriggerDay="2"
          TriggerHour="17"
          UnlockIssue="10"
+         UnlockIssueMinComplexity="40"
          UnlockIssueMaxComplexity="75"
          TriggerDialogName="EndOfDay"
+         OpenReportWindow="false"/>
+  
+  <Event TriggerDay="2"
+         TriggerHour="12"
+         TriggerMinute="12"
+         UnlockIssue="2"
+         UnlockIssueMinComplexity="75"
+         UnlockIssueMaxComplexity="100"
+         TriggerDialogName="YaggosIsFired"
          OpenReportWindow="false"/>
 
   <Event TriggerDay="3"
          TriggerHour="17"
          UnlockIssue="10"
+         UnlockIssueMinComplexity="55"
          UnlockIssueMaxComplexity="100"
          TriggerDialogName="EndOfDay"
          OpenReportWindow="false"/>
@@ -48,4 +62,5 @@
          UnlockIssueMaxComplexity="0"
          TriggerDialogName="WinGame"
          OpenReportWindow="true"/>
+  
 </ArrayOfEvent>

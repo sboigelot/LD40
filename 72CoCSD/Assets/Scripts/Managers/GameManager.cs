@@ -1,31 +1,54 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Models;
+using Assets.Scripts.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Managers
 {
     public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         public Game Game;
-        public Player Player;
         public AnimationCurve WordLengths;
         public PrototypeManager PrototypeManager;
+
+        public GameObject StartScreenPanel;
+        public GameObject GameOverPanel;
+        public GameObject GameWonPanel;
 
         public void Start()
         {
             //make the prototypeManager visible in unity inspector
             PrototypeManager = PrototypeManager.Instance;
-            StartCoroutine(PrototypeManager.LoadPrototypes(()=>NewGame()));
+            StartCoroutine(PrototypeManager.LoadPrototypes(NewGame));
         }
 
         public void NewGame()
         {
-            Player = new Player();
+            StartScreenPanel.SetActive(true);
+            GameOverPanel.SetActive(false);
+            GameWonPanel.SetActive(false);
+
+            DailyReportWindowController.Instance.gameObject.SetActive(false);
+            ProcessWindowConstroller.Instance.gameObject.SetActive(false);
+            ContactWindowController.Instance.gameObject.SetActive(false);
+
             Game = new Game();
             Game.Initialize();
         }
-        
+
+        public void EndGame(bool win)
+        {
+            Game.Paused = true;
+            if (win)
+            {
+                GameWonPanel.GetComponent<EndGamePanel>().Open();
+            }
+            else
+            {
+                GameOverPanel.GetComponent<EndGamePanel>().Open();
+            }
+        }
+
         public void Update()
         {
             if (Game != null)
@@ -34,8 +57,14 @@ namespace Assets.Scripts.Managers
             }
         }
 
+        private float lastOpenTrainBotCommand = 0;
+
         public void OpenTrainBot()
         {
+            if(lastOpenTrainBotCommand >= Time.time - 2f)
+                return;
+            lastOpenTrainBotCommand = Time.time;
+
             var botDialog = PrototypeManager.Instance.GetDialogWithId("Tr@inBot");
             botDialog.OpenChat();
         }

@@ -8,24 +8,17 @@ using Assets.Scripts.UI;
 namespace Assets.Scripts.Models
 {
     [Serializable]
-    public class Collegue : IContact
+    public class Collegue : ContactBase
     {
-        [XmlAttribute]
-        public string Name { get; set; }
-
         public string DefaultName { get; set; }
-
-        [XmlAttribute]
+        
         public List<Dialog> Dialogs;
 
         private Dialog CurrentDialog;
 
         private Issue SimpliestIssue;
 
-        [XmlIgnore]
-        public string NextForcedPlayerInput { get; set; }
-
-        public float Read(string playerText)
+        public override float Read(string playerText)
         {
             if (CurrentDialog.CurrentLine.AckAsLowerComplexityIssue)
             {
@@ -35,7 +28,7 @@ namespace Assets.Scripts.Models
             return 1f;
         }
 
-        public ChatLine Speak()
+        public override ChatLine Speak()
         {
             CurrentDialog = Dialogs.FirstOrDefault();
 
@@ -61,7 +54,7 @@ namespace Assets.Scripts.Models
             };
         }
 
-        public ChatLine GetLastSentence()
+        public override ChatLine GetLastSentence()
         {
             return
                 CurrentDialog == null || CurrentDialog.CurrentLine == null
@@ -75,15 +68,10 @@ namespace Assets.Scripts.Models
                     };
         }
 
-        public void QuitSatified()
+        public override void QuitSatified()
         {
-            GameManager.Instance.Game.Paused = false;
-            ChatWindow.StartCoroutine(
-            ChatWindow.WriteLineIn("blue", "System",
-                string.Format("<color=blue>{0} left the chat</color>", Name),
-                1));
+            GameManager.Instance.Game.PauseHandle--;
+            base.QuitSatified();
         }
-
-        public ChatWindowController ChatWindow { get; set; }
     }
 }

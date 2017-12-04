@@ -28,9 +28,12 @@ namespace Assets.Scripts.Models
 
         [XmlAttribute]
         public int UnlockIssue;
-        
+
         [XmlAttribute]
-        public float UnlockIssueMaxComplexity;
+        public int UnlockIssueMaxComplexity;
+
+        [XmlAttribute]
+        public int UnlockIssueMinComplexity;
 
         [XmlAttribute]
         public string TriggerDialogName;
@@ -42,7 +45,7 @@ namespace Assets.Scripts.Models
         {
             if (UnlockIssue != 0)
             {
-                GameManager.Instance.Game.UnlockNewIssues(5, 0, 40);
+                GameManager.Instance.Game.UnlockNewIssues(UnlockIssue, UnlockIssueMinComplexity, UnlockIssueMaxComplexity);
             }
 
             if (OpenReportWindow)

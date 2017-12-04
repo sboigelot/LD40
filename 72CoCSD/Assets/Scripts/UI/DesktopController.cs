@@ -18,7 +18,7 @@ namespace Assets.Scripts.UI
         public GameObject ContactWindow;
         public GameObject ReportWindow;
 
-        public ChatWindowController OpenChatWindow(IContact customer)
+        public ChatWindowController OpenChatWindow(ContactBase customer)
         {
             var newChat = Instantiate(ChatWindowTemplate, ChatWindowTemplate.transform.parent);
             
@@ -60,11 +60,6 @@ namespace Assets.Scripts.UI
                 dayTime.Hours <= 12 ? dayTime.Hours : dayTime.Hours - 12,
                 dayTime.Minutes,
                 dayTime.Hours <= 12 ? "AM" : "PM");
-        }
-
-        public void ShowDailyReport(int dayTimeDays)
-        {
-            
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Assets.Scripts.Models
         {
             if (PauseGame)
             {
-                GameManager.Instance.Game.Paused = true;
+                GameManager.Instance.Game.PauseHandle++;
             }
 
             var chatWindow = DesktopController.Instance.OpenChatWindow(new Collegue

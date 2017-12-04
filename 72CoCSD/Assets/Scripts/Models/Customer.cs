@@ -7,23 +7,17 @@ using UnityEngine;
 namespace Assets.Scripts.Models
 {
     [Serializable]
-    public class Customer : IContact
+    public class Customer : ContactBase
     {
-        public string Name { get; set; }
-
         public int IssueLeft;
 
         public float Satisfaction { get; set; }
 
-        public string NextForcedPlayerInput { get; set; }
-
         public CustomerSpawn Prototype;
 
         public Issue CurrentIssue;
-
-        public ContactItemController ContactItemController;
         
-        public ChatLine Speak()
+        public override ChatLine Speak()
         {
             IssueLeft--;
             if (IssueLeft < 0)
@@ -58,7 +52,7 @@ namespace Assets.Scripts.Models
             };
         }
 
-        public float Read(string playerText)
+        public override float Read(string playerText)
         {
             if (CurrentIssue == null)
             {
@@ -119,7 +113,7 @@ namespace Assets.Scripts.Models
             return effectivenes;
         }
 
-        public ChatLine GetLastSentence()
+        public override ChatLine GetLastSentence()
         {
             return CurrentIssue == null ? null : new ChatLine
             {
@@ -137,28 +131,49 @@ namespace Assets.Scripts.Models
             }
         }
 
-        public void RageQuit()
+        public override void RageQuit()
         {
             if (ContactItemController != null)
             {
                 var report = GameManager.Instance.Game.TodayReport;
                 report.FailedCustomers++;
                 Satisfaction = 0;
-                ContactItemController.Disconect();
             }
+            Disconect();
         }
 
-        public void QuitSatified()
+        public override void QuitSatified()
         {
-            if (ContactItemController != null)
+            if (ContactItemController == null)
             {
-                var report = GameManager.Instance.Game.TodayReport;
-                report.ServeCustomers++;
-                report.TotalSatisfaction += Satisfaction;
-                ContactItemController.Disconect();
+                return;
             }
+
+            var report = GameManager.Instance.Game.TodayReport;
+            report.ServeCustomers++;
+            report.TotalSatisfaction += Satisfaction;
+            Disconect();
         }
 
-        public ChatWindowController ChatWindow { get; set; }
+        protected override void Disconect()
+        {
+            if (ChatWindow != null)
+            {
+                ChatWindow.WriteLine(
+                    ChatWindow.GetTimeString(),
+                    "blue",
+                    "System",
+                    string.Format("<color=blue>{0} left the chat with a satisfaction of {1}</color>", Name,
+                        Mathf.Round(Satisfaction)));
+            }
+            else
+            {
+                Debug.LogWarning("ChatWindow not found on disconecting customer " + Name);
+            }
+
+            ContactItemController.Contact = null;
+            GameManager.Instance.Game.CustomerQueue.Remove(this);
+            ContactWindowController.Instance.Rebuild();
+        }
     }
 }

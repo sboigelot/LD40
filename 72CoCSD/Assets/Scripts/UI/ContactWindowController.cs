@@ -22,7 +22,7 @@ namespace Assets.Scripts.UI
             foreach (var customer in customers.Where(c=>!remainingCustomers.Contains(c)))
             {
                 var customerCard = Instantiate(CustomerTemplate, CustomerPanel);
-                customerCard.GetComponent<ContactItemController>().SetupForCustomer(customer);
+                customerCard.GetComponent<ContactItemController>().SetupForContact(customer);
                 customerCard.SetActive(true);
             }
         }

@@ -1,12 +1,14 @@
 <ArrayOfGameSettings>
 
   <GameSettings
-        MinutesPerGameTime="5"
+        MinutesPerGameTime="3"
         SatisfactionLossPerGameTime="1"
-        SatisfactionGainPerCorrectAnswer="10"
-        SatisfactionGainPerIncorrectAnswer="2"
+        SatisfactionGainPerCorrectAnswer="20"
+        SatisfactionGainPerIncorrectAnswer="-3"
         NumberOfPossibleIssues="100"
         NumberOfPossibleWords="100"
-        AnswerDeviationTolerance="0.9"/>
+        AnswerDeviationTolerance="0.85"
+        MusicVolume="0.3"
+        SoundVolume="0.4"/>
   
 </ArrayOfGameSettings>

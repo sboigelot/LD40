@@ -11,7 +11,7 @@
     <Line Question="Hehe just kidding, as you may know, here at 72Co Customer Satisfaction Departement, we get calls from all over the parallel multiverse and it’s too costly to have expert translators in every languages there is."
           ForcedAnswer="Sure! That seems obvious!"/>
     <Line Question="So your job is simple, I’ll give you a procedure to follow while chatting with our dear customers. Try to identify what they are speaking about in the list of pre-made question / answer couple and just type the correct answer in chat."
-          ForcedAnswer="Ok, search the question in the list and type the answer. Go it!"/>
+          ForcedAnswer="Ok, search the question in the list and type the answer. Got it!"/>
     <Line Question="That’s as easy as that, chat with them, solve their issues and make them happy. So let’s get you through the training bot first. Close this window, Open the Tr@inBot app on your desktop and the list of procedures (ProCes7). Have fun, I’ll check on you during the day."
           ForcedAnswer="Here I go.... closing this window... or not? Am I still typing?                   Apparently yes...                I should probably stop now"/>
   </Dialog>
@@ -28,7 +28,10 @@
     <Line AckAsLowerComplexityIssue="true"/>
     <Line OverrideSpeaker="James"
           Question="Congratulation! Now open your SatisIM2 app and close this training app, customer will arrive shortly. Be sure to answer them in time, a waiting customer is an angry customer!"
-          ForcedAnswer="Will do sir!"/>
+          ForcedAnswer="Will do sir! Anything else?"/>
+    <Line OverrideSpeaker="James"
+          Question="Yes, one last thing: if you fail to server too much customer in a day, you will get fired on the spot. (you can adjust difficulty and sound settings in the start menu - control panel)"
+          ForcedAnswer="Ok here I go!"/>
   </Dialog>
 
   <Dialog Id="AllCustomerDealtWith"
@@ -47,6 +50,17 @@
         PauseGame="true">
     <Line Question="Hey!? I can't keep up, can I give you some of my customers?"
           ForcedAnswer="Yhea of course, this job is easy"/>
+  </Dialog>
+
+  <Dialog Id="YaggosIsFired"
+        CollegueName="James"
+        PauseGame="true">
+    <Line Question="Are you there?"
+          ForcedAnswer="I'm here, what can I do for you James?"/>
+    <Line Question="Yaggos kept giving his customer away to other employee. I had to get rid of him as it was putting to much load on nice working people like you."
+          ForcedAnswer="That's sad to hear"/>
+    <Line Question="I know but what else could I have done? Anyway, this means we have to take care of his customer of the day too, are you up to the task?"
+          ForcedAnswer="Sure..."/>
   </Dialog>
 
   <Dialog Id="EndOfDay"

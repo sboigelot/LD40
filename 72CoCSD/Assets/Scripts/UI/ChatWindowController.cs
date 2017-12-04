@@ -19,33 +19,33 @@ namespace Assets.Scripts.UI
         public GameObject CustomerProgressPanel;
 
         public int PlayerMistakeCount;
-        public IContact Contact;
+        public ContactBase ContactBase;
         public int OverrideMaxLine;
 
         protected override void OnOpen(object context)
         {
             Input.onValidateInput += OnValidateInput;
             ChatText.text = "";
-            Contact = (IContact)context;
-            CustomerProgressPanel.SetActive(Contact is Customer);
-            Contact.ChatWindow = this;
+            ContactBase = (ContactBase)context;
+            CustomerProgressPanel.SetActive(ContactBase is Customer);
+            ContactBase.ChatWindow = this;
             WriteNextLine(0);
         }
 
         protected override void OnClose()
         {
-            if (Contact is Collegue)
+            if (ContactBase is Collegue)
             {
-                GameManager.Instance.Game.Paused = false;
+                GameManager.Instance.Game.PauseHandle--;
             }
         }
 
         private char OnValidateInput(string text, int charIndex, char addedChar)
         {
-            var forced = Contact.NextForcedPlayerInput;
+            var forced = ContactBase.NextForcedPlayerInput;
 
             if (GameManager.Instance.Game.Paused && 
-                Contact is Customer)
+                ContactBase is Customer)
             {
                 forced =
                     "You can't speak to customer while the game is pause, stop speaking to collegues and bots to unpause the game";
@@ -60,11 +60,11 @@ namespace Assets.Scripts.UI
         private void WriteNextLine(int delayInSeconds)
         {
             PlayerMistakeCount = 0;
-            var nextLine = Contact.Speak();
+            var nextLine = ContactBase.Speak();
 
             if (nextLine == null)
             {
-                Contact.QuitSatified();
+                ContactBase.QuitSatified();
                 Input.enabled = false;
                 return;
             }
@@ -75,18 +75,18 @@ namespace Assets.Scripts.UI
 
         public void Send()
         {
-            if (string.IsNullOrEmpty(Input.text.Trim()) || Contact == null)
+            if (string.IsNullOrEmpty(Input.text.Trim()) || ContactBase == null)
             {
                 return;
             }
 
             string time = GetTimeString();
             string playerText = Input.text.Trim();
-            var effectivenes = Contact.Read(playerText);
+            var effectivenes = ContactBase.Read(playerText);
             var understood = effectivenes >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance;
 
             string text =
-                Contact is Customer
+                ContactBase is Customer
                     ? string.Format("{0}\t\t<i>(<color={1}>{2}</color> {3}% correct)</i>",
                         playerText,
                         understood ? "green" : "red",
@@ -103,14 +103,14 @@ namespace Assets.Scripts.UI
             else
             {
                 PlayerMistakeCount++;
-                var customer = Contact as Customer;
+                var customer = ContactBase as Customer;
                 if (PlayerMistakeCount > 4 && customer != null)
                 {
                     customer.RageQuit();
                 }
                 else
                 {
-                    var last = Contact.GetLastSentence();
+                    var last = ContactBase.GetLastSentence();
                     var lastText = last.Text;
                     if (PlayerMistakeCount > 1)
                     {
@@ -163,7 +163,7 @@ namespace Assets.Scripts.UI
                     text);
 
             var lineCount = ChatText.text.Count(c => c == '\n');
-            if (lineCount >= (OverrideMaxLine != 0 ? OverrideMaxLine : 16))
+            if (lineCount >= (OverrideMaxLine != 0 ? OverrideMaxLine : 15))
             {
                 ChatText.text = ChatText.text.Substring(ChatText.text.IndexOf('\n') + 1);
             }
@@ -177,20 +177,20 @@ namespace Assets.Scripts.UI
 
         public void Update()
         {
-            if (Contact == null)
+            if (ContactBase == null)
             {
                 return;
             }
 
-            var customer = Contact as Customer;
+            var customer = ContactBase as Customer;
             if (customer != null)
             {
                 CustomerProgress.Refresh(customer);
-                TitleText.text = Contact.Name + " (" + Mathf.Round(customer.Satisfaction) + ")";
+                TitleText.text = ContactBase.Name + " (" + Mathf.Round(customer.Satisfaction) + ")";
                 return;
             }
 
-            TitleText.text = Contact.Name;
+            TitleText.text = ContactBase.Name;
         }
     }
 }

@@ -26,5 +26,11 @@ namespace Assets.Scripts.Models
 
         [XmlAttribute]
         public float AnswerDeviationTolerance = .9f;
+
+        [XmlAttribute]
+        public float MusicVolume = .3f;
+
+        [XmlAttribute]
+        public float SoundVolume = .4f;
     }
 }

@@ -13,6 +13,16 @@ namespace Assets.Scripts.Models
         public float GameTime;
         public bool Paused = true;
 
+        public int PauseHandle
+        {
+            get { return pauseHandle; }
+            set
+            {
+                pauseHandle = Math.Max(value, 0);
+                Paused = pauseHandle > 0;
+            }
+        }
+
         public List<Issue> Issues;
         public List<Customer> CustomerQueue;
         public List<Word> Words;
@@ -28,7 +38,8 @@ namespace Assets.Scripts.Models
         public TimeSpan DayTime;
         public TimeSpan DayStart = new TimeSpan(0, 8, 0, 0);
         public TimeSpan DayEnd = new TimeSpan(5, 17, 0, 0);
-        
+        private int pauseHandle;
+
         public void Initialize()
         {
             DayTime = new TimeSpan(DayStart.Ticks);
@@ -131,7 +142,11 @@ namespace Assets.Scripts.Models
 
                 if (DayTime.Hours >= DayEnd.Hours)
                 {
-                    EndOfTheDay();
+                    if (EndOfTheDay())
+                    {
+                        GameManager.Instance.EndGame(!LastDayWasAFailure());
+                        return;
+                    }
                 }
 
                 TriggerEvents();
@@ -140,12 +155,28 @@ namespace Assets.Scripts.Models
             }
         }
 
-        private void EndOfTheDay()
+        private bool LastDayWasAFailure()
+        {
+            var lastReport = DailyReports.Last();
+            return (float)lastReport.FailedCustomers > (float)lastReport.ServeCustomers / 2f;
+        }
+
+        private bool EndOfTheDay()
         {
             DisconectAllClient();
-            DesktopController.Instance.ShowDailyReport(DayTime.Days);
+            DailyReportWindowController.Instance.OpenWindow();
+
             DayTime = new TimeSpan(DayTime.Days + 1, DayStart.Hours, DayStart.Minutes, 0);
-            DailyReports.Add(new DailyReport { Day = DayTime.Days });
+            
+            if (DayTime.Days == 5 || LastDayWasAFailure())
+            {
+                return true;
+            }
+            else
+            {
+                DailyReports.Add(new DailyReport { Day = DayTime.Days });
+                return false;
+            }
         }
 
         private void DisconectAllClient()
