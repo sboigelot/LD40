@@ -75,13 +75,14 @@ namespace Assets.Scripts.UI
 
         public void Send()
         {
+            string playerText = Input.text.Trim();
+
             if (string.IsNullOrEmpty(Input.text.Trim()) || ContactBase == null)
             {
                 return;
             }
 
             string time = GetTimeString();
-            string playerText = Input.text.Trim();
             var effectivenes = ContactBase.Read(playerText);
             var understood = effectivenes >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance;
 

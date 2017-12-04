@@ -55,6 +55,15 @@
          UnlockIssueMaxComplexity="100"
          TriggerDialogName="EndOfDay"
          OpenReportWindow="false"/>
+
+  <Event TriggerDay="4"
+         TriggerHour="12"
+         TriggerMinute="12"
+         UnlockIssue="2"
+         UnlockIssueMinComplexity="75"
+         UnlockIssueMaxComplexity="100"
+         TriggerDialogName="TakeMine"
+         OpenReportWindow="false"/>
   
   <Event TriggerDay="4"
          TriggerHour="17"

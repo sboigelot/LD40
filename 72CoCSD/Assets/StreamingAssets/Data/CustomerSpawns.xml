@@ -65,41 +65,38 @@
         SpawnDay="1" SpawnHour="12" SpawnMinute="13"
         MinComplexity="0" MaxComplexity="55"
         StartingIssue="3" StartingSatisfaction="400"/>
-  <!--<CustomerSpawn
-        SpawnDay="1" SpawnHour="12" SpawnMinute="13"
-        MinComplexity="0" MaxComplexity="75"
-        StartingIssue="2" StartingSatisfaction="400"/>
-  <CustomerSpawn
-        SpawnDay="1" SpawnHour="12" SpawnMinute="13"
-        MinComplexity="0" MaxComplexity="75"
-        StartingIssue="1" StartingSatisfaction="400"/>-->
   <!-- the yaggos customers-->
 
   <!--Day 2-->
-  <!--<CustomerSpawn
-        SpawnDay="1" SpawnHour="8" SpawnMinute="5"
+  <CustomerSpawn
+        SpawnDay="2" SpawnHour="8" SpawnMinute="5"
         MinComplexity="30" MaxComplexity="75"
         StartingIssue="2" StartingSatisfaction="280"/>
 
   <CustomerSpawn
-        SpawnDay="1" SpawnHour="8" SpawnMinute="5"
+        SpawnDay="2" SpawnHour="8" SpawnMinute="5"
         MinComplexity="30" MaxComplexity="55"
         StartingIssue="2" StartingSatisfaction="50"/>
 
   <CustomerSpawn
-        SpawnDay="1" SpawnHour="8" SpawnMinute="5"
+        SpawnDay="2" SpawnHour="8" SpawnMinute="5"
         MinComplexity="30" MaxComplexity="85"
         StartingIssue="2" StartingSatisfaction="240"/>
 
   <CustomerSpawn
-        SpawnDay="1" SpawnHour="11" SpawnMinute="40"
+        SpawnDay="2" SpawnHour="11" SpawnMinute="40"
         MinComplexity="30" MaxComplexity="100"
         StartingIssue="2" StartingSatisfaction="100"/>
 
   <CustomerSpawn
-        SpawnDay="1" SpawnHour="13" SpawnMinute="50"
+        SpawnDay="2" SpawnHour="13" SpawnMinute="50"
         MinComplexity="0" MaxComplexity="75"
-        StartingIssue="3" StartingSatisfaction="280"/>-->
+        StartingIssue="3" StartingSatisfaction="280"/>
+
+  <CustomerSpawn
+        SpawnDay="2" SpawnHour="14" SpawnMinute="10"
+        MinComplexity="0" MaxComplexity="50"
+        StartingIssue="3" StartingSatisfaction="280"/>
   
   <!-- the yaggos is fired-->
   <CustomerSpawn
@@ -118,10 +115,98 @@
         SpawnDay="2" SpawnHour="12" SpawnMinute="13"
         MinComplexity="50" MaxComplexity="100"
         StartingIssue="2" StartingSatisfaction="400"/>
-  <CustomerSpawn
-        SpawnDay="2" SpawnHour="12" SpawnMinute="13"
-        MinComplexity="50" MaxComplexity="100"
-        StartingIssue="1" StartingSatisfaction="400"/>
   <!-- the yaggos is fired-->
 
+  <!-- Day 3 -->
+  <CustomerSpawn
+        SpawnDay="3" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="40" MaxComplexity="100"
+        StartingIssue="2" StartingSatisfaction="180"/>
+
+  <CustomerSpawn
+        SpawnDay="3" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="40" MaxComplexity="100"
+        StartingIssue="2" StartingSatisfaction="180"/>
+
+  <CustomerSpawn
+        SpawnDay="3" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="40" MaxComplexity="100"
+        StartingIssue="2" StartingSatisfaction="50"/>
+
+  <CustomerSpawn
+        SpawnDay="3" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="40" MaxComplexity="100"
+        StartingIssue="2" StartingSatisfaction="140"/>
+
+  <CustomerSpawn
+        SpawnDay="3" SpawnHour="11" SpawnMinute="40"
+        MinComplexity="40" MaxComplexity="100"
+        StartingIssue="2" StartingSatisfaction="80"/>
+
+  <CustomerSpawn
+        SpawnDay="3" SpawnHour="13" SpawnMinute="50"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="180"/>
+
+  <CustomerSpawn
+        SpawnDay="3" SpawnHour="14" SpawnMinute="10"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="120"/>
+
+  <!-- Day 4 -->
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="4" StartingSatisfaction="120"/>
+
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="180"/>
+
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="40" MaxComplexity="70"
+        StartingIssue="1" StartingSatisfaction="60"/>
+
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="8" SpawnMinute="5"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="140"/>
+
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="11" SpawnMinute="40"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="4" StartingSatisfaction="80"/>
+
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="13" SpawnMinute="50"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="2" StartingSatisfaction="100"/>
+
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="14" SpawnMinute="10"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="100"/>
+
+  <!-- Take mine-->
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="80" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="300"/>
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="80" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="300"/>
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="80" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="300"/>
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="80" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="300"/>
+  <!-- Take mine -->
+  
+  
 </ArrayOfCustomerSpawn>

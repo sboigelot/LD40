@@ -70,6 +70,13 @@
           ForcedAnswer="No probem James, thanks for all your help today!"/>
   </Dialog>
 
+  <Dialog Id="TakeMine"
+        CollegueName="James"
+        PauseGame="true">
+    <Line Question="Ok, good work until know! Let's see how you handle my customers!"
+          ForcedAnswer="ho my..."/>
+  </Dialog>
+  
   <Dialog Id="WinGame"
         CollegueName="James"
         PauseGame="true">
