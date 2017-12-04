@@ -38,6 +38,7 @@ namespace Assets.Scripts.UI
             {
                 GameManager.Instance.Game.PauseHandle--;
             }
+            Destroy(gameObject);
         }
 
         private char OnValidateInput(string text, int charIndex, char addedChar)
@@ -86,15 +87,22 @@ namespace Assets.Scripts.UI
             var effectivenes = ContactBase.Read(playerText);
             var understood = effectivenes >= PrototypeManager.Instance.GameSettings.AnswerDeviationTolerance;
 
+            var cheat = true;
+            if (cheat)
+            {
+                understood = true;
+            }
+
             var forced = ContactBase.NextForcedPlayerInput;
             string text = !string.IsNullOrEmpty(forced) ? forced : 
                 ContactBase is Customer
                     ? string.Format("{0}\t\t<i>(<color={1}>{2}</color> {3}% correct)</i>",
                         playerText,
                         understood ? "green" : "red",
-                        understood ? "V" : "X",
+                        understood ? cheat? "C" :"V" : "X",
                         Math.Round(effectivenes, 2) * 100)
                     : playerText;
+
 
             WriteLine(time, "green","Player", text);
             SoundController.Instance.PlaySound(SoundController.Instance.NewMessage2AudioClip);

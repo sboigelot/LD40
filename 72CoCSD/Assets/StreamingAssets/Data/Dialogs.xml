@@ -58,7 +58,7 @@
         PauseGame="true">
     <Line Question="Are you there?"
           ForcedAnswer="I'm here, what can I do for you James?"/>
-    <Line Question="Yaggos kept giving his customer away to other employee. I had to get rid of him as it was putting to much load on nice working people like you."
+    <Line Question="Yaggos kept giving his customer away to other employee. I had to get rid of him as it was putting too much load on nice working people like you."
           ForcedAnswer="That's sad to hear"/>
     <Line Question="I know but what else could I have done? Anyway, this means we have to take care of his customer of the day too, are you up to the task?"
           ForcedAnswer="Sure..."/>

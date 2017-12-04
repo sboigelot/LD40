@@ -164,7 +164,7 @@ namespace Assets.Scripts.Models
         private bool EndOfTheDay()
         {
             DisconectAllClient();
-            DailyReportWindowController.Instance.OpenWindow();
+            //DailyReportWindowController.Instance.OpenWindow();
 
             DayTime = new TimeSpan(DayTime.Days + 1, DayStart.Hours, DayStart.Minutes, 0);
             
@@ -241,7 +241,7 @@ namespace Assets.Scripts.Models
                     }
                     else if(dialogName == "WinGame")
                     {
-                        //TODO implement wining game
+                        GameManager.Instance.EndGame(true);
                     }
                 }
                 return;

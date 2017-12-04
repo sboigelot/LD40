@@ -4,7 +4,7 @@
         NumberOfPossibleIssues="100"
         NumberOfPossibleWords="100"
         MinutesPerGameTime="3"
-        SatisfactionLossPerGameTime="1"
+        SatisfactionLossPerGameTime="1.1"
         SatisfactionGainPerCorrectAnswer="20"
         SatisfactionGainPerIncorrectAnswer="-3"
         AnswerDeviationTolerance="0.85"

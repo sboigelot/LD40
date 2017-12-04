@@ -192,20 +192,28 @@
   <!-- Take mine-->
   <CustomerSpawn
         SpawnDay="4" SpawnHour="12" SpawnMinute="13"
-        MinComplexity="80" MaxComplexity="100"
-        StartingIssue="3" StartingSatisfaction="300"/>
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="100"/>
   <CustomerSpawn
         SpawnDay="4" SpawnHour="12" SpawnMinute="13"
-        MinComplexity="80" MaxComplexity="100"
-        StartingIssue="3" StartingSatisfaction="300"/>
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="150"/>
   <CustomerSpawn
         SpawnDay="4" SpawnHour="12" SpawnMinute="13"
-        MinComplexity="80" MaxComplexity="100"
-        StartingIssue="3" StartingSatisfaction="300"/>
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="100"/>
   <CustomerSpawn
         SpawnDay="4" SpawnHour="12" SpawnMinute="13"
-        MinComplexity="80" MaxComplexity="100"
-        StartingIssue="3" StartingSatisfaction="300"/>
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="80"/>
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="100"/>
+  <CustomerSpawn
+        SpawnDay="4" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="60" MaxComplexity="100"
+        StartingIssue="3" StartingSatisfaction="80"/>
   <!-- Take mine -->
   
   
