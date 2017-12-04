@@ -17,7 +17,7 @@ namespace Assets.Scripts.UI
         public void PlaySound(AudioClip sound)
         {
             //var slider = GameObject.Find("SoundEffectSlider");
-            var volume = 0.25f;
+            var volume = PrototypeManager.Instance.GameSettings.SoundVolume;
             //if (slider != null)
             //{
             //    volume = slider.GetComponent<Slider>().value;
