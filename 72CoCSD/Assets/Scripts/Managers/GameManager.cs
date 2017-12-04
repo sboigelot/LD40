@@ -24,7 +24,6 @@ namespace Assets.Scripts.Managers
             Player = new Player();
             Game = new Game();
             Game.Initialize();
-            //now done by events: PrototypeManager.GetDialogWithId("IntroWithJames").OpenChat();
         }
         
         public void Update()

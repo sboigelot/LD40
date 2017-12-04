@@ -2,11 +2,50 @@
 
   <Event TriggerDay="0"
          TriggerHour="8"
-         TriggerMinute="0"
-         Triggered="false"
          UnlockIssue="5"
          UnlockIssueMaxComplexity="40"
          TriggerDialogName="IntroWithJames"
          OpenReportWindow="false"/>
 
+  <Event TriggerDay="0"
+         TriggerHour="17"
+         UnlockIssue="3"
+         UnlockIssueMaxComplexity="60"
+         TriggerDialogName="EndOfDay"
+         OpenReportWindow="false"/>
+
+  <Event TriggerDay="1"
+         TriggerHour="12"
+         TriggerMinute="12"
+         TriggerDialogName="YaggosGiveHisCustomers"
+         OpenReportWindow="false"/>
+  
+  <Event TriggerDay="1"
+         TriggerHour="17"
+         Triggered="false"
+         UnlockIssue="5"
+         UnlockIssueMaxComplexity="60"
+         TriggerDialogName="EndOfDay"
+         OpenReportWindow="false"/>
+
+  <Event TriggerDay="2"
+         TriggerHour="17"
+         UnlockIssue="10"
+         UnlockIssueMaxComplexity="75"
+         TriggerDialogName="EndOfDay"
+         OpenReportWindow="false"/>
+
+  <Event TriggerDay="3"
+         TriggerHour="17"
+         UnlockIssue="10"
+         UnlockIssueMaxComplexity="100"
+         TriggerDialogName="EndOfDay"
+         OpenReportWindow="false"/>
+  
+  <Event TriggerDay="4"
+         TriggerHour="17"
+         UnlockIssue="0"
+         UnlockIssueMaxComplexity="0"
+         TriggerDialogName="WinGame"
+         OpenReportWindow="true"/>
 </ArrayOfEvent>

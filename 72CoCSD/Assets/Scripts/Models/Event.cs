@@ -45,14 +45,14 @@ namespace Assets.Scripts.Models
                 GameManager.Instance.Game.UnlockNewIssues(5, 0, 40);
             }
 
-            if (!string.IsNullOrEmpty(TriggerDialogName))
-            {
-                PrototypeManager.Instance.GetDialogWithId(TriggerDialogName).OpenChat();
-            }
-
             if (OpenReportWindow)
             {
                 DailyReportWindowController.Instance.OpenWindow();
+            }
+
+            if (!string.IsNullOrEmpty(TriggerDialogName))
+            {
+                PrototypeManager.Instance.GetDialogWithId(TriggerDialogName).OpenChat();
             }
 
             Triggered = true;

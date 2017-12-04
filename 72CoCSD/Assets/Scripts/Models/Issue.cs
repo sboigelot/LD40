@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Managers;
 
 namespace Assets.Scripts.Models
 {
@@ -8,11 +9,8 @@ namespace Assets.Scripts.Models
     public class Issue
     {
         public Sentence Question;
-        //public float QuestionPotentialOrderDivergence;
 
         public Sentence Answer;
-        //public bool AnswerOrderMatter;
-        //public float AnswerOrderDivergenceAcceptance;
 
         public bool Unlocked;
 
@@ -20,14 +18,17 @@ namespace Assets.Scripts.Models
         {
             get
             {
-                return Question.Complexity + 4 * Answer.Complexity;
+                return Question.Complexity + 3 * Answer.Complexity;
             }
         }
 
         public void Initialise(List<Word> vocabulary)
         {
             Question = new Sentence(vocabulary, 2, 6);
-            Answer = new Sentence(vocabulary, 1, 4);
+
+            var onWordAnswerIssueCount = GameManager.Instance.Game.Issues.Count(i => i.Answer.Words.Count == 1);
+            Answer = new Sentence(vocabulary,
+                onWordAnswerIssueCount <= 7 ? 1 : 2, 4);
             Unlocked = false;
         }
     }

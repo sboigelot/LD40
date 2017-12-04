@@ -8,7 +8,7 @@
           ForcedAnswer="Hello... I'll do my best :)"/>
     <Line Question="I guess you know what you’ll have to do so, I’ll leave you to it. Have fun"
           ForcedAnswer="What? heu... wait, where am I? what am I suppose to do?"/>
-    <Line Question="Hehe just kidding, as you may now, here at 72Co Customer Satisfaction Departement, we get calls from all over the parallel multiverse and it’s too costly to have expert translators in every languages there is."
+    <Line Question="Hehe just kidding, as you may know, here at 72Co Customer Satisfaction Departement, we get calls from all over the parallel multiverse and it’s too costly to have expert translators in every languages there is."
           ForcedAnswer="Sure! That seems obvious!"/>
     <Line Question="So your job is simple, I’ll give you a procedure to follow while chatting with our dear customers. Try to identify what they are speaking about in the list of pre-made question / answer couple and just type the correct answer in chat."
           ForcedAnswer="Ok, search the question in the list and type the answer. Go it!"/>
@@ -40,5 +40,26 @@
     <Line OverrideSpeaker="System"
           Question="Close this window to skip to the next day"
           ForcedAnswer="will do"/>
+  </Dialog>
+
+  <Dialog Id="YaggosGiveHisCustomers"
+        CollegueName="Yaggos"
+        PauseGame="true">
+    <Line Question="Hey!? I can't keep up, can I give you some of my customers?"
+          ForcedAnswer="Yhea of course, this job is easy"/>
+  </Dialog>
+
+  <Dialog Id="EndOfDay"
+        CollegueName="James"
+        PauseGame="true">
+    <Line Question="The day is over, or at least we dealt with all the customer. Take the time to look at your FireMeNot app, and when you ready, close this chat to jump to the next day! You will have more responsabilities tomorow, so take a breather."
+          ForcedAnswer="No probem James, thanks for all your help today!"/>
+  </Dialog>
+
+  <Dialog Id="WinGame"
+        CollegueName="James"
+        PauseGame="true">
+    <Line Question="WinGameWinGameWinGameWinGameWinGameWinGame"
+          ForcedAnswer="I'm awesome"/>
   </Dialog>
 </ArrayOfDialog>

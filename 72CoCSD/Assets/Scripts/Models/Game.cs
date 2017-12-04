@@ -112,6 +112,14 @@ namespace Assets.Scripts.Models
                 Issues.Add(issue);
             }
             Issues = Issues.OrderBy(w => w.Complexity).ToList();
+
+            string dump = "";
+            foreach (var issue in Issues)
+            {
+                dump += string.Format("{0}: {1} -> {2}", issue.Complexity, issue.Question, issue.Answer) +
+                        Environment.NewLine;
+            }
+            Debug.Log(dump);
         }
         
         public void Update(float deltaTime)
@@ -186,8 +194,25 @@ namespace Assets.Scripts.Models
 
             if (!customerOfTheDay.Any() && !CustomerQueue.Any())
             {
-                PrototypeManager.Instance.GetDialogWithId("AllCustomerDealtWith").OpenChat();
-                EndOfTheDay();
+                var untriggerEvents =
+                PrototypeManager.Instance.Events
+                .Where(cs => !cs.Triggered &&
+                             cs.TriggerTime.Days <= DayTime.Days).ToList();
+
+                if (untriggerEvents.Count == 1)
+                {
+                    var uEvent = untriggerEvents.Single();
+                    var dialogName = uEvent.TriggerDialogName;
+                    if (dialogName == "EndOfDay")
+                    {
+                        uEvent.Trigger();
+                        EndOfTheDay();
+                    }
+                    else if(dialogName == "WinGame")
+                    {
+                        //TODO implement wining game
+                    }
+                }
                 return;
             }
 

@@ -50,6 +50,30 @@
   <CustomerSpawn
         SpawnDay="1" SpawnHour="11" SpawnMinute="50"
         MinComplexity="0" MaxComplexity="75"
-        StartingIssue="2" StartingSatisfaction="280"/>
+        StartingIssue="3" StartingSatisfaction="280"/>
+
+  <!-- the yaggos customers-->
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="0" MaxComplexity="75"
+        StartingIssue="1" StartingSatisfaction="400"/>
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="0" MaxComplexity="75"
+        StartingIssue="2" StartingSatisfaction="400"/>
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="0" MaxComplexity="55"
+        StartingIssue="3" StartingSatisfaction="400"/>
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="0" MaxComplexity="75"
+        StartingIssue="2" StartingSatisfaction="400"/>
+  <CustomerSpawn
+        SpawnDay="1" SpawnHour="12" SpawnMinute="13"
+        MinComplexity="0" MaxComplexity="75"
+        StartingIssue="1" StartingSatisfaction="400"/>
+  <!-- the yaggos customers-->
+  
 
 </ArrayOfCustomerSpawn>
